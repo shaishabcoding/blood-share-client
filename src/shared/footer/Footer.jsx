@@ -8,7 +8,9 @@ const Footer = () => {
             className="w-24 6 h-24 dark:saturate-0 dark:invert"
           />
           <p>
-            <span className="font-bold text-xl">Blood Share</span>
+            <span className="font-bold text-xl lg:text-4xl  text-primary dark:text-primary-light">
+              Blood Share
+            </span>
             <br />
             &copy; 2024 Blood Share. All rights reserved.
           </p>

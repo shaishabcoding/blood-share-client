@@ -6,7 +6,7 @@
   @apply text-gray-600 dark:text-gray-200 font-semibold;
 }
 #navbar .active {
-  @apply bg-white border-b-2 border-sky-500 dark:bg-white/20 dark:text-white font-bold;
+  @apply bg-white border-b-2 border-primary dark:border-primary-light dark:bg-white/20 dark:text-white font-bold;
 }
 body {
   @apply font-open-sans select-none;

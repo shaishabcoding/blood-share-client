@@ -80,7 +80,7 @@ const Navbar = () => {
           to="/"
           className="btn btn-ghost text-base font-bold md:px-4 px-0 md:text-xl"
         >
-          <span className="flex gap-1 lg:gap-2 items-center">
+          <span className="flex gap-1 lg:gap-2 items-center text-primary dark:text-primary-light">
             <img className="w-[1.5em]" src="/logo.png" /> Blood Share
           </span>
         </Link>
