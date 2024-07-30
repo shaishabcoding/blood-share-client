@@ -11,7 +11,8 @@ const TopDonar = () => {
         img: "https://lh3.googleusercontent.com/a/ACg8ocK6mA1zk-rpoZeHMOKxU8EYa_zRh9kShOJkfxGTiLNUT5i7Gw=s96-c",
         url: "https://example.com/profiles/johndoe",
       },
-      donationQuantity: 500,
+      quantity: 500,
+      isActive: true,
     },
     {
       bloodGroup: "O-",
@@ -21,7 +22,7 @@ const TopDonar = () => {
         img: "https://lh3.googleusercontent.com/a/ACg8ocK6mA1zk-rpoZeHMOKxU8EYa_zRh9kShOJkfxGTiLNUT5i7Gw=s96-c",
         url: "https://example.com/profiles/janesmith",
       },
-      donationQuantity: 450,
+      quantity: 450,
     },
     {
       bloodGroup: "B+",
@@ -31,7 +32,7 @@ const TopDonar = () => {
         img: "https://lh3.googleusercontent.com/a/ACg8ocK6mA1zk-rpoZeHMOKxU8EYa_zRh9kShOJkfxGTiLNUT5i7Gw=s96-c",
         url: "https://example.com/profiles/alicejohnson",
       },
-      donationQuantity: 470,
+      quantity: 470,
     },
     {
       bloodGroup: "AB-",
@@ -41,7 +42,7 @@ const TopDonar = () => {
         img: "https://lh3.googleusercontent.com/a/ACg8ocK6mA1zk-rpoZeHMOKxU8EYa_zRh9kShOJkfxGTiLNUT5i7Gw=s96-c",
         url: "https://example.com/profiles/bobbrown",
       },
-      donationQuantity: 490,
+      quantity: 490,
     },
     {
       bloodGroup: "O+",
@@ -51,7 +52,7 @@ const TopDonar = () => {
         img: "https://lh3.googleusercontent.com/a/ACg8ocK6mA1zk-rpoZeHMOKxU8EYa_zRh9kShOJkfxGTiLNUT5i7Gw=s96-c",
         url: "https://example.com/profiles/charliedavis",
       },
-      donationQuantity: 520,
+      quantity: 520,
     },
   ];
 
@@ -80,12 +81,17 @@ const TopDonar = () => {
                 </div>
               )}
               <div className="grow">
-                <h3 className="text-xl font-semibold">{donar.profile.name}</h3>
+                <h3 className="text-xl font-semibold">
+                  {donar.profile.name}
+                  {donar.isActive && (
+                    <div className="badge badge-accent ml-2">active</div>
+                  )}
+                </h3>
                 <p>
                   <span className="font-semibold">Group:</span>{" "}
                   {donar.bloodGroup} |{" "}
-                  <span className="font-semibold">Quantity:</span>
-                  {donar.donationQuantity}
+                  <span className="font-semibold">Quantity:</span>{" "}
+                  {donar.quantity}
                 </p>
               </div>
               <div className="-rotate-90">

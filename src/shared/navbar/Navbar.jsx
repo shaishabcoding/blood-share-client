@@ -103,8 +103,10 @@ const Navbar = () => {
               <img
                 tabIndex={0}
                 role="button"
+                title="Profile"
+                alt="Profile Picture"
                 src={user?.photoURL}
-                className="w-10 lg:w-12 aspect-square object-center mr-2 md:mr-4 rounded-full ring-4 ring-sky-500 dark:ring-gray-400"
+                className="w-10 lg:w-12 aspect-square object-center mr-2 md:mr-4 rounded-full ring hover:scale-95 ring-primary dark:ring-gray-400"
               />
               <ul
                 tabIndex={0}
