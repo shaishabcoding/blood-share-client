@@ -99,21 +99,33 @@ const Navbar = () => {
         </div>
         {user ? (
           <>
-            <div
-              className="tooltip md:mr-4 z-10 tooltip-left lg:tooltip-bottom"
-              data-tip={user?.displayName}
-            >
+            <div className="dropdown dropdown-end">
               <img
+                tabIndex={0}
+                role="button"
                 src={user?.photoURL}
-                className="w-10 lg:w-12 aspect-square object-center mr-2 lg:mr-0 rounded-full ring-4 ring-sky-500 dark:ring-gray-400"
+                className="w-10 lg:w-12 aspect-square object-center mr-2 md:mr-4 rounded-full ring-4 ring-sky-500 dark:ring-gray-400"
               />
+              <ul
+                tabIndex={0}
+                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 mt-4 bg-gradient-to-br from-green-50  dark:from-gray-700 via-pink-50 dark:via-gray-800 to-sky-50 dark:to-gray-700 dark:text-white dark:border-gray-500"
+              >
+                <span className="mx-4 mt-2 font-semibold">
+                  {user?.displayName}
+                </span>
+                <li>
+                  <Link to="/dashboard/profile" className="font-medium">
+                    Profile
+                  </Link>
+                </li>
+                <button
+                  className="btn btn-sm text-xs p-0 bg-white dark:bg-gray-500 dark:border-gray-400 dark:text-white"
+                  onClick={logOut}
+                >
+                  Logout <HiOutlineLogout />
+                </button>
+              </ul>
             </div>
-            <button
-              className="btn bg-white hidden md:flex items-center justify-center dark:bg-gray-500 dark:border-gray-400 dark:text-white"
-              onClick={logOut}
-            >
-              Logout <HiOutlineLogout />
-            </button>
           </>
         ) : (
           <div className="hidden md:join">

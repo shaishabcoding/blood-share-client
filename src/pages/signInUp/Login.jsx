@@ -29,7 +29,7 @@ const Login = () => {
   return (
     <div className="m-4 p-6 lg:mx-0 rounded-lg lg:pb-10 border  bg-gradient-to-bl from-green-50  dark:from-gray-700 via-pink-50 dark:via-gray-800 to-sky-50 dark:to-gray-700 dark:text-white dark:border-gray-500">
       <h2 className="text-2xl lg:mt-8 lg:mb-12  lg:text-5xl font-semibold text-center mb-6">
-        Please Login
+        Welcome back!
       </h2>
       <div className="w-fit mx-auto">
         <form className="grid w-fit mx-auto gap-4" onSubmit={handleFormSubmit}>
@@ -88,7 +88,7 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="btn w-full btn-primary dark:bg-blue-800 dark:border-gray-400"
+              className="btn w-full bg-primary dark:bg-primary-light text-white dark:border-gray-400"
             >
               Login <FiLogIn />
             </button>

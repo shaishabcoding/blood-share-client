@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import { BiUserPlus } from "react-icons/bi";
 import testUsers from "../../assets/json/testUsers.json";
 import useAuth from "../../hooks/useAuth";
+import imgBB from "../../utils/imgBB";
+import Loading from "../../shared/loading/Loading";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -15,25 +17,31 @@ const Register = () => {
   const [isShowPass, setIsShowPass] = useState(false);
   const [image, setImage] = useState("");
   const { register, handleSubmit } = useForm();
+  const [loading, setLoading] = useState(false);
 
-  const handleFormSubmit = handleSubmit(({ email, password, image, name }) => {
-    if (!/[A-Z]/.test(password)) {
-      toast.error("Must have an Uppercase letter in the password");
-    } else if (!/[a-z]/.test(password)) {
-      toast.error("Must have a Lowercase letter in the password");
-    } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-      toast.error("Must have a special character in the password");
-    } else {
-      createUser({ email, password, image, name }, () => {
-        toast.success("Account created successfully");
-        navigate(location?.state ?? "/");
-      });
+  const handleFormSubmit = handleSubmit(
+    async ({ email, password, image, name }) => {
+      if (!/[A-Z]/.test(password)) {
+        toast.error("Must have an Uppercase letter in the password");
+      } else if (!/[a-z]/.test(password)) {
+        toast.error("Must have a Lowercase letter in the password");
+      } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        toast.error("Must have a special character in the password");
+      } else {
+        setLoading(true);
+        const url = await imgBB(image[0]);
+        createUser({ email, password, image: url, name }, () => {
+          toast.success("Account created successfully");
+          navigate(location?.state ?? "/");
+          setLoading(false);
+        });
+      }
     }
-  });
+  );
   return (
     <div className="m-4 p-6 lg:mx-0 rounded-lg border bg-gradient-to-bl from-green-50  dark:from-gray-700 via-pink-50 dark:via-gray-800 to-sky-50 dark:to-gray-700 dark:text-white dark:border-gray-500">
       <h2 className="text-2xl lg:mt-8 lg:text-5xl lg:mb-12 font-semibold text-center mb-6">
-        Please Register
+        Let's Get Started!
       </h2>
       <datalist id="test-users">
         {testUsers.map((user, index) => (
@@ -62,26 +70,17 @@ const Register = () => {
             {...register("name")}
           />
         </label>
-        <label className="input input-bordered flex items-center gap-2 dark:bg-gray-500 dark:border-gray-400 p-2 pr-2">
-          <img
-            src={image ? image : imgHolder}
-            className="w-[2em] aspect-square object-center rounded-full bg-gray-50 ring-2"
-          />
-          <div className="overflow-hidden flex grow ml-1">
-            <input
-              type="url"
-              list="test-users"
-              className="grow -mr-4"
-              placeholder="Enter your image url"
-              required
-              {...register("image", {
-                onChange: (e) => {
-                  setImage(e.target.value);
-                },
-              })}
-            />
-          </div>
-        </label>
+        <input
+          type="file"
+          placeholder="Enter your image url"
+          required
+          {...register("image", {
+            onChange: (e) => {
+              setImage(URL.createObjectURL(e.target.files[0]));
+            },
+          })}
+          className="file-input file-input-bordered w-full dark:file:bg-gray-400 dark:file:text-white border-gray-300 file:bg-gray-50 file:text-gray-600 file:border-0 dark:bg-gray-500 dark:border-gray-400"
+        />
         <label className="input input-bordered flex items-center gap-2 dark:bg-gray-500 dark:border-gray-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -136,10 +135,17 @@ const Register = () => {
         </div>
         <div>
           <button
+            disabled={loading}
             type="submit"
             className="btn w-full btn-primary dark:bg-blue-800 dark:border-gray-400"
           >
-            Register <BiUserPlus />
+            {loading ? (
+              <Loading className="my-0 text-primary" />
+            ) : (
+              <>
+                Register <BiUserPlus />
+              </>
+            )}
           </button>
         </div>
       </form>
