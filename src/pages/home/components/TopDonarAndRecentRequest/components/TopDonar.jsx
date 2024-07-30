@@ -58,7 +58,7 @@ const TopDonar = () => {
 
   return (
     <div>
-      <h2 className="font-bold text-5xl mb-12 text-primary">
+      <h2 className="font-bold text-4xl mb-6 md:mb-10 text-primary">
         Top Donar <BiSolidDonateBlood className="inline" />
       </h2>
       <div className="flex flex-col gap-2">

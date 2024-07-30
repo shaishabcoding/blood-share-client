@@ -3,10 +3,7 @@ const Footer = () => {
     <div className="bg-gradient-to-r from-green-50  dark:from-gray-900 via-pink-50 dark:via-gray-800 to-sky-50 dark:to-gray-900 dark:text-white">
       <footer className="footer p-10 lg:px-28 lg:mt-6">
         <aside>
-          <img
-            src="/logo.png"
-            className="w-24 6 h-24 dark:saturate-0 dark:invert"
-          />
+          <img src="/logo.png" className="w-24 6 h-24" />
           <p>
             <span className="font-bold text-xl lg:text-4xl  text-primary dark:text-primary-light">
               Blood Share
