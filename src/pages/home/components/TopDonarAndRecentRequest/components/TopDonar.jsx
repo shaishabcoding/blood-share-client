@@ -1,3 +1,4 @@
+import moment from "moment";
 import { BiSolidDonateBlood } from "react-icons/bi";
 import { FaArrowAltCircleDown } from "react-icons/fa";
 
@@ -5,10 +6,10 @@ const TopDonar = () => {
   const donars = [
     {
       bloodGroup: "A+",
-      time: "2024-07-28T10:00:00Z",
+      time: "2024-05-28T10:00:00Z",
       profile: {
         name: "John Doe",
-        img: "https://lh3.googleusercontent.com/a/ACg8ocK6mA1zk-rpoZeHMOKxU8EYa_zRh9kShOJkfxGTiLNUT5i7Gw=s96-c",
+        img: "logo.png",
         url: "https://example.com/profiles/johndoe",
       },
       quantity: 500,
@@ -16,10 +17,10 @@ const TopDonar = () => {
     },
     {
       bloodGroup: "O-",
-      time: "2024-07-28T11:30:00Z",
+      time: "2024-07-25T11:30:00Z",
       profile: {
         name: "Jane Smith",
-        img: "https://lh3.googleusercontent.com/a/ACg8ocK6mA1zk-rpoZeHMOKxU8EYa_zRh9kShOJkfxGTiLNUT5i7Gw=s96-c",
+        img: "logo.png",
         url: "https://example.com/profiles/janesmith",
       },
       quantity: 450,
@@ -29,7 +30,7 @@ const TopDonar = () => {
       time: "2024-07-28T13:00:00Z",
       profile: {
         name: "Alice Johnson",
-        img: "https://lh3.googleusercontent.com/a/ACg8ocK6mA1zk-rpoZeHMOKxU8EYa_zRh9kShOJkfxGTiLNUT5i7Gw=s96-c",
+        img: "logo.png",
         url: "https://example.com/profiles/alicejohnson",
       },
       quantity: 470,
@@ -39,7 +40,7 @@ const TopDonar = () => {
       time: "2024-07-28T14:45:00Z",
       profile: {
         name: "Bob Brown",
-        img: "https://lh3.googleusercontent.com/a/ACg8ocK6mA1zk-rpoZeHMOKxU8EYa_zRh9kShOJkfxGTiLNUT5i7Gw=s96-c",
+        img: "logo.png",
         url: "https://example.com/profiles/bobbrown",
       },
       quantity: 490,
@@ -49,7 +50,7 @@ const TopDonar = () => {
       time: "2024-07-28T16:15:00Z",
       profile: {
         name: "Charlie Davis",
-        img: "https://lh3.googleusercontent.com/a/ACg8ocK6mA1zk-rpoZeHMOKxU8EYa_zRh9kShOJkfxGTiLNUT5i7Gw=s96-c",
+        img: "logo.png",
         url: "https://example.com/profiles/charliedavis",
       },
       quantity: 520,
@@ -71,20 +72,20 @@ const TopDonar = () => {
           >
             <div className="h-full w-full flex items-center gap-2">
               <div className="avatar">
-                <div className="w-16 mask mask-squircle border">
+                <div className="w-16 mask mask-squircle bg-white dark:bg-gray-800">
                   <img src={donar.profile.img} />
                 </div>
               </div>
               {idx === 0 && (
-                <div className="w-12 absolute -top-3 -left-3 -rotate-45">
+                <div className="w-12 absolute -top-2 -left-3 -rotate-45">
                   <img src="/crown.png" />
                 </div>
               )}
               <div className="grow">
                 <h3 className="text-xl font-semibold">
-                  {donar.profile.name}
+                  {donar.profile.name}{" "}
                   {donar.isActive && (
-                    <div className="badge badge-accent ml-2">active</div>
+                    <div className="badge badge-accent">active</div>
                   )}
                 </h3>
                 <p>
@@ -92,6 +93,9 @@ const TopDonar = () => {
                   {donar.bloodGroup} |{" "}
                   <span className="font-semibold">Quantity:</span>{" "}
                   {donar.quantity}
+                  <br />
+                  <span className="font-semibold">Last donation:</span>{" "}
+                  {moment(donar.time).fromNow()}
                 </p>
               </div>
               <div className="-rotate-90">

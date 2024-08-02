@@ -94,7 +94,7 @@ const Navbar = () => {
             onClick={toggleDarkMode}
             className="btn m-1 text-3xl btn-ghost dark:hover:bg-gray-500 p-2 rounded-full"
           >
-            {isDarkMode ? <CiDark /> : <CiLight />}
+            {isDarkMode ? <CiLight /> : <CiDark />}
           </button>
         </div>
         {user ? (
