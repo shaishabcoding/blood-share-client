@@ -27,11 +27,11 @@ const Login = () => {
     }
   });
   return (
-    <div className="m-4 p-6 lg:mx-0 rounded-lg lg:pb-10 border  bg-gradient-to-bl from-green-50  dark:from-gray-700 via-pink-50 dark:via-gray-800 to-sky-50 dark:to-gray-700 dark:text-white dark:border-gray-500">
-      <h2 className="text-2xl lg:mt-8 lg:mb-12  lg:text-5xl font-semibold text-center mb-6">
+    <div className="mx-0 pb-4 lg:my-6 my-1 p-2 lg:mx-0 lg:rounded-lg lg:pb-10 border  bg-gradient-to-bl from-green-50  dark:from-gray-700 via-pink-50 dark:via-gray-800 to-sky-50 dark:to-gray-700 dark:text-white dark:border-gray-500">
+      <h2 className="text-2xl lg:mt-16 lg:mb-12  lg:text-5xl font-semibold text-center mb-6 mt-10">
         Welcome back!
       </h2>
-      <div className="w-fit mx-auto">
+      <div className="w-fit mx-auto max-w-full overflow-auto md:overflow-hidden">
         <form className="grid w-fit mx-auto gap-4" onSubmit={handleFormSubmit}>
           <label className="input input-bordered flex items-center gap-2 dark:bg-gray-500 dark:border-gray-400">
             <svg
@@ -88,14 +88,14 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="btn w-full bg-primary dark:bg-primary-light text-white dark:border-gray-400"
+              className="btn w-full bg-primary-light dark:bg-primary text-white dark:border-gray-400"
             >
               Login <FiLogIn />
             </button>
           </div>
         </form>
         <p className="text-center">
-          Don&apos;t have an account?{" "}
+          Don't have an account?{" "}
           <Link
             className="btn btn-link p-0 dark:text-blue-300"
             to="/register"

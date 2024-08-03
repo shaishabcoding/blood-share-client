@@ -5,7 +5,6 @@ import imgHolder from "../../../assets/icons/image-placeholder.jpg";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { BiUserPlus } from "react-icons/bi";
-import testUsers from "../../../assets/json/testUsers.json";
 import useAuth from "../../../hooks/useAuth";
 import imgBB from "../../../utils/imgBB";
 import Loading from "../../../shared/loading/Loading";
@@ -39,20 +38,18 @@ const Register = () => {
     }
   );
   return (
-    <div className="m-4 p-6 lg:mx-0 rounded-lg border bg-gradient-to-bl from-green-50  dark:from-gray-700 via-pink-50 dark:via-gray-800 to-sky-50 dark:to-gray-700 dark:text-white dark:border-gray-500">
-      <h2 className="text-2xl lg:mt-8 lg:text-5xl lg:mb-12 font-semibold text-center mb-6">
+    <div className="mx-0 pb-4 lg:my-6 my-1 p-2 lg:rounded-lg border bg-gradient-to-bl from-green-50  dark:from-gray-700 via-pink-50 dark:via-gray-800 to-sky-50 dark:to-gray-700 dark:text-white dark:border-gray-500">
+      <h2 className="text-2xl lg:mt-16 lg:text-5xl lg:mb-12 font-semibold text-center mb-6 mt-10">
         Let's Get Started!
       </h2>
-      <datalist id="test-users">
-        {testUsers.map((user, index) => (
-          <option key={index} value={user} />
-        ))}
-      </datalist>
       <img
         src={image ? image : imgHolder}
         className="w-[150px] aspect-square object-center rounded-full bg-gray-50 ring-4 mx-auto mb-6 dark:ring-gray-400"
       />
-      <form className="grid w-fit mx-auto gap-4" onSubmit={handleFormSubmit}>
+      <form
+        className="grid w-fit mx-auto gap-4 max-w-full overflow-auto md:overflow-hidden"
+        onSubmit={handleFormSubmit}
+      >
         <label className="input input-bordered flex items-center gap-2 dark:bg-gray-500 dark:border-gray-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -99,8 +96,8 @@ const Register = () => {
             {...register("email")}
           />
         </label>
-        <div className="join">
-          <label className="input input-bordered flex items-center gap-2 dark:bg-gray-500 dark:border-gray-400 join-item">
+        <div className="join w-full flex">
+          <label className="input grow input-bordered flex items-center gap-2 dark:bg-gray-500 dark:border-gray-400 join-item">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -137,7 +134,7 @@ const Register = () => {
           <button
             disabled={loading}
             type="submit"
-            className="btn w-full btn-primary dark:bg-blue-800 dark:border-gray-400"
+            className="btn w-full bg-primary-light dark:bg-primary-dark text-white"
           >
             {loading ? (
               <Loading className="my-0 text-primary" />

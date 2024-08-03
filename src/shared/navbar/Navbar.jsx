@@ -28,10 +28,10 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/dfs">Home</NavLink>
+        <NavLink to="/request">Request</NavLink>
       </li>
       {user ? (
-        <li>ok</li>
+        <></>
       ) : (
         <>
           <div className="md:hidden">
@@ -80,8 +80,12 @@ const Navbar = () => {
           to="/"
           className="btn btn-ghost text-base font-bold md:px-4 px-0 md:text-xl"
         >
-          <span className="flex gap-1 lg:gap-2 items-center text-primary dark:text-primary-light">
-            <img className="w-[1.5em]" src="/logo.png" /> Blood Share
+          <span className="flex gap-1 lg:gap-2 items-center text-primary-light dark:text-white">
+            <img
+              className="w-[1.5em] dark:bg-white dark:mask dark:mask-squircle"
+              src="/logo.png"
+            />{" "}
+            Blood Share
           </span>
         </Link>
       </div>

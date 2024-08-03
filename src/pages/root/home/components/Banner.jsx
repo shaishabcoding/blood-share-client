@@ -55,24 +55,21 @@ const Banner = () => {
             everyone. Together, we can save lives and make a real difference in
             our community. Sign up now to donate blood and become a hero today!
           </p>
-          <div className="join">
-            <div>
-              <div>
-                <select
-                  defaultValue="default"
-                  className="select select-bordered join-item border-primary dark:border-primary-light bg-white dark:bg-gray-400"
-                >
-                  <option hidden disabled value="default">
-                    Select a blood group
-                  </option>
-                  {bloodGroups.map((blood, idx) => (
-                    <option key={idx} value={blood}>
-                      {blood}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
+          <div className="join w-full">
+            <select
+              defaultValue="default"
+              className="select grow md:grow-0 select-bordered join-item border-primary dark:border-primary-light bg-white dark:bg-gray-400"
+            >
+              <option hidden disabled value="default">
+                Select a blood group
+              </option>
+              {bloodGroups.map((blood, idx) => (
+                <option key={idx} value={blood}>
+                  {blood}
+                </option>
+              ))}
+            </select>
+
             <div className="indicator">
               <button className="btn join-item bg-primary dark:bg-primary-light text-secondary-light border-primary dark:border-primary-light">
                 Search <FaSearch />

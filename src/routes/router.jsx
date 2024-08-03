@@ -4,8 +4,9 @@ import Login from "../pages/root/signInUp/Login";
 import Register from "../pages/root/signInUp/Register";
 // import PrivateRoute from "./PrivateRoute";
 import Home from "../pages/root/home/Home";
-import Error from "../pages/root/404/Error";
+import Error from "../pages/404/Error";
 import Request from "../pages/root/request/Request";
+import NewRequest from "../pages/root/request/newRequest/NewRequest";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "request",
         element: <Request></Request>,
+      },
+      {
+        path: "request/new",
+        element: <NewRequest></NewRequest>,
       },
     ],
   },

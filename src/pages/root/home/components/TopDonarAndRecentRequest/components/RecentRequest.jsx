@@ -87,7 +87,7 @@ const RecentRequest = () => {
                 <h3 className="text-xl font-semibold">
                   {request.profile.name}{" "}
                   {request.isEmergency && (
-                    <div className="badge badge-error">Urgent</div>
+                    <div className="badge badge-error text-white">Urgent</div>
                   )}
                 </h3>
                 <p>
