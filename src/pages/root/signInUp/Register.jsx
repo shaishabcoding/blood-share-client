@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import imgHolder from "../../assets/icons/image-placeholder.jpg";
+import imgHolder from "../../../assets/icons/image-placeholder.jpg";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { BiUserPlus } from "react-icons/bi";
-import testUsers from "../../assets/json/testUsers.json";
-import useAuth from "../../hooks/useAuth";
-import imgBB from "../../utils/imgBB";
-import Loading from "../../shared/loading/Loading";
+import testUsers from "../../../assets/json/testUsers.json";
+import useAuth from "../../../hooks/useAuth";
+import imgBB from "../../../utils/imgBB";
+import Loading from "../../../shared/loading/Loading";
 
 const Register = () => {
   const navigate = useNavigate();

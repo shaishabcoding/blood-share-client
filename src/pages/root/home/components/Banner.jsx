@@ -1,6 +1,6 @@
 import { BiSolidDonateBlood } from "react-icons/bi";
 import { FaSearch } from "react-icons/fa";
-import getRandomColor from "../../../utils/getRandomColor";
+import getRandomColor from "../../../../utils/getRandomColor";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCards } from "swiper/modules";
 import "swiper/css";
