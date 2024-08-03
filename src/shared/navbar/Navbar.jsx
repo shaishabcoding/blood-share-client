@@ -49,7 +49,7 @@ const Navbar = () => {
   return (
     <nav
       id="navbar"
-      className="navbar dark:bg-red-400 bg-gradient-to-r from-green-50  dark:from-gray-600 via-pink-50 dark:via-gray-700 to-sky-50 dark:to-gray-600 dark:text-white lg:rounded-lg"
+      className="navbar backdrop-blur-md sticky top-0 lg:static z-50 bg-gradient-to-r from-green-50/80  dark:from-gray-600/80 via-pink-50/80 dark:via-gray-700/80 to-sky-50/50 dark:to-gray-600/80 dark:text-white lg:rounded-lg"
     >
       <div className="navbar-start">
         <div className="dropdown">
@@ -110,7 +110,7 @@ const Navbar = () => {
                 title="Profile"
                 alt="Profile Picture"
                 src={user?.photoURL}
-                className="w-10 lg:w-12 aspect-square object-center mr-2 md:mr-4 rounded-full ring hover:scale-95 ring-primary dark:ring-gray-400"
+                className="w-10 lg:w-12 bg-white aspect-square object-center mr-2 md:mr-4 rounded-full ring hover:scale-95 ring-primary dark:ring-gray-400"
               />
               <ul
                 tabIndex={0}

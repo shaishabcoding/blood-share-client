@@ -9,7 +9,7 @@ const Root = () => {
 
   return (
     <div className="bg-white dark:bg-black dark:text-white font-open-sans">
-      <div className="lg:px-28 lg:pt-6 ">
+      <div className="lg:px-28 lg:pt-6">
         <Navbar></Navbar>
         {loading && <Loading></Loading>}
         <Outlet></Outlet>

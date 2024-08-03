@@ -11,7 +11,7 @@ const post = (key, data) => {
 const get = (key) => {
   key = "blood_share_" + key;
   const allData = JSON.parse(localStorage.getItem(key));
-  return Promise.resolve(allData);
+  return allData;
 };
 
 const axios = { post, get };

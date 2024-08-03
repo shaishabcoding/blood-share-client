@@ -12,6 +12,7 @@ const NewRequest = () => {
     user: {
       displayName: "Shaishab Chandra Shil",
       email: "shaishab316@gmail.com",
+      photoURL: "/logo.png",
     },
   }; /* ToDo: remove */
 
@@ -27,6 +28,7 @@ const NewRequest = () => {
       email: user?.email,
       contactEmail: user?.email,
       patientName: user?.displayName,
+      img: user?.photoURL,
     },
   });
 
@@ -49,7 +51,7 @@ const NewRequest = () => {
   return (
     <div className="w-full lg:p-6 px-2 lg:mx-0 lg:rounded-lg lg:my-6 my-1 py-6 bg-gradient-to-bl from-green-50 dark:from-gray-700 via-pink-50 dark:via-gray-800 to-sky-50 dark:to-gray-700 dark:text-white dark:border-gray-500">
       <h2 className="text-2xl lg:mt-10 lg:mb-12 lg:text-5xl font-semibold text-center mb-6">
-        New Request
+        New Blood Request
       </h2>
       <div className="w-full lg:px-12 mx-auto">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -225,9 +227,18 @@ const NewRequest = () => {
             <label className="input hidden input-bordered items-center gap-2 dark:bg-gray-500 dark:border-gray-400">
               Email
               <input
-                type="text"
+                type="email"
                 className="grow cursor-not-allowed"
                 {...register("email")}
+                disabled
+              />
+            </label>
+            <label className="input hidden input-bordered items-center gap-2 dark:bg-gray-500 dark:border-gray-400">
+              Img
+              <input
+                type="text"
+                className="grow cursor-not-allowed"
+                {...register("img")}
                 disabled
               />
             </label>
