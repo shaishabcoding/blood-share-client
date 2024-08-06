@@ -21,7 +21,7 @@ const Profile = () => {
   const handleCheckedChange = (e) => {
     setDonationChecked(e.target.checked);
     if (e.target.checked) {
-      // navigate("donation-profile");
+      navigate("/dashboard/donation-profile");
     }
   };
 

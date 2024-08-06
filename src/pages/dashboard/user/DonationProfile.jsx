@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 // import useAuth from "../../../../hooks/useAuth";
-import axios from "../../../../utils/Axios";
+import axios from "../../../utils/Axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import Loading from "../../../../shared/loading/Loading";
+import Loading from "../../../shared/loading/Loading";
 import { BiSolidDonateBlood } from "react-icons/bi";
 
-const NewRequest = () => {
+const DonationProfile = () => {
   // const { user } = useAuth();
   const { user } = {
     user: {
@@ -51,7 +51,7 @@ const NewRequest = () => {
   return (
     <div className="w-full lg:p-6 px-2 lg:mx-0 lg:rounded-lg lg:mt-6 bg-gradient-to-bl from-green-50 dark:from-gray-700 via-pink-50 dark:via-gray-800 to-sky-50 dark:to-gray-700 dark:text-white dark:border-gray-500">
       <h2 className="text-2xl lg:mb-12 lg:text-5xl font-semibold text-center mb-6">
-        New Blood Request
+        Donation Profile
       </h2>
       <div className="w-full mx-auto">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -59,21 +59,21 @@ const NewRequest = () => {
             <div>
               <label
                 className={`input input-bordered flex items-center gap-2 dark:bg-gray-500 dark:border-gray-400 ${
-                  errors.patientName ? "border-red-500" : ""
+                  errors.donarName ? "border-red-500" : ""
                 }`}
               >
-                Patient Name
+                Donar Name
                 <input
                   type="text"
                   className="grow"
-                  placeholder="Enter patient name"
-                  {...register("patientName", {
-                    required: "Please enter patient name",
+                  placeholder="Enter donar name"
+                  {...register("donarName", {
+                    required: "Please enter donar name",
                   })}
                 />
               </label>
-              {errors.patientName && (
-                <p className="text-red-500">{errors.patientName.message}</p>
+              {errors.donarName && (
+                <p className="text-red-500">{errors.donarName.message}</p>
               )}
             </div>
             <div>
@@ -109,22 +109,22 @@ const NewRequest = () => {
             <div>
               <label
                 className={`input input-bordered flex items-center gap-2 dark:bg-gray-500 dark:border-gray-400 ${
-                  errors.type ? "border-red-500" : ""
+                  errors.donations ? "border-red-500" : ""
                 }`}
               >
-                Type
-                <select
-                  {...register("type", {
-                    required: "Please select type",
+                Time
+                <input
+                  defaultValue={0}
+                  type="text"
+                  className="grow"
+                  placeholder="Enter Donation time [e.g.: 1]"
+                  {...register("donations", {
+                    required: "Please enter donation time",
                   })}
-                  className="grow border-0 outline-0 bg-transparent dark:bg-gray-500 dark:text-gray-200"
-                >
-                  <option selected>Regular</option>
-                  <option>Emergency</option>
-                </select>
+                />
               </label>
-              {errors.type && (
-                <p className="text-red-500">{errors.type.message}</p>
+              {errors.donations && (
+                <p className="text-red-500">{errors.donations.message}</p>
               )}
             </div>
             <div>
@@ -153,12 +153,14 @@ const NewRequest = () => {
                   errors.time ? "border-red-500" : ""
                 }`}
               >
-                Time
+                Last donate
                 <input
-                  type="datetime-local"
+                  type="date"
                   className="grow"
-                  placeholder="Enter post time"
-                  {...register("time", { required: "Please enter the time" })}
+                  placeholder="Enter donation date"
+                  {...register("time", {
+                    required: "Please enter last donation date",
+                  })}
                 />
               </label>
               {errors.time && (
@@ -248,7 +250,7 @@ const NewRequest = () => {
               {...register("description", {
                 required: "Please enter a description",
               })}
-              className={`textarea textarea-bordered w-full h-40 my-2 dark:bg-gray-500 dark:border-gray-400 ${
+              className={`textarea textarea-bordered w-full h-40 mt-2 dark:bg-gray-500 dark:border-gray-400 ${
                 errors.description ? "border-red-500" : ""
               }`}
               placeholder="Enter description"
@@ -259,14 +261,14 @@ const NewRequest = () => {
           </div>
           <button
             disabled={loading}
-            className="btn bg-primary-light text-white dark:bg-primary-dark w-full"
+            className="btn bg-primary-light mt-2 text-white dark:bg-primary-dark w-full"
             type="submit"
           >
             {loading ? (
               <Loading className="my-0 text-primary" />
             ) : (
               <>
-                Request <BiSolidDonateBlood />
+                Donate <BiSolidDonateBlood />
               </>
             )}
           </button>
@@ -276,4 +278,4 @@ const NewRequest = () => {
   );
 };
 
-export default NewRequest;
+export default DonationProfile;

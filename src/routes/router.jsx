@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import Root from "../layouts/root/Root";
 import Dashboard from "../layouts/dashboard/Dashboard";
 import Login from "../pages/root/signInUp/Login";
@@ -9,6 +9,7 @@ import Error from "../pages/404/Error";
 import Request from "../pages/root/request/Request";
 import NewRequest from "../pages/root/request/newRequest/NewRequest";
 import Profile from "../pages/dashboard/user/Profile";
+import DonationProfile from "../pages/dashboard/user/DonationProfile";
 
 const router = createBrowserRouter([
   {
@@ -32,10 +33,6 @@ const router = createBrowserRouter([
         path: "request",
         element: <Request></Request>,
       },
-      {
-        path: "request/new",
-        element: <NewRequest></NewRequest>,
-      },
     ],
   },
   {
@@ -45,7 +42,19 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Navigate to="profile"></Navigate>,
+      },
+      {
+        path: "profile",
         element: <Profile></Profile>,
+      },
+      {
+        path: "donation-profile",
+        element: <DonationProfile></DonationProfile>,
+      },
+      {
+        path: "blood-request",
+        element: <NewRequest></NewRequest>,
       },
     ],
   },

@@ -13,7 +13,7 @@ const Navbar = ({ links }) => {
   return (
     <nav
       id="sidebar"
-      className="navbar backdrop-blur-md sticky top-0 lg:static z-50 bg-gradient-to-r from-green-50  dark:from-gray-600 via-pink-50 dark:via-gray-700 to-sky-50 dark:to-gray-600 dark:text-white lg:rounded-lg"
+      className="navbar backdrop-blur-md bg-gradient-to-r from-green-50/80  dark:from-gray-600/80 via-pink-50/80 dark:via-gray-700/80 to-sky-50/50 dark:to-gray-600/80 dark:text-white lg:rounded-lg"
     >
       <div className="navbar-start">
         <div className="dropdown">

@@ -38,13 +38,13 @@ const Dashboard = () => {
   ) : (
     <ul className="menu menu-sm lg:menu-md">
       <li>
-        <NavLink to="/dashboard">My Profile</NavLink>
+        <NavLink to="/dashboard/profile">My Profile</NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/meals/request">Requested Meals</NavLink>
+        <NavLink to="/dashboard/blood-request">Blood request</NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/reviews/my">My Reviews</NavLink>
+        <NavLink to="/dashboard/donation-profile">Donation profile</NavLink>
       </li>
       <li>
         <NavLink to="/dashboard/payment/history">Payment History</NavLink>
@@ -54,7 +54,7 @@ const Dashboard = () => {
 
   return (
     <div className="bg-white dark:bg-black dark:text-white font-open-sans">
-      <div className="md:hidden">
+      <div className="md:hidden sticky top-0">
         <Navbar links={links} />
       </div>
       <div className="lg:px-28 md:h-screen flex flex-row lg:py-6 lg:gap-6">
