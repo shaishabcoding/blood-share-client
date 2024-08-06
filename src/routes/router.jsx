@@ -7,9 +7,10 @@ import Register from "../pages/root/signInUp/Register";
 import Home from "../pages/root/home/Home";
 import Error from "../pages/404/Error";
 import Request from "../pages/root/request/Request";
-import NewRequest from "../pages/root/request/newRequest/NewRequest";
+import NewRequest from "../pages/dashboard/user/NewRequest";
 import Profile from "../pages/dashboard/user/Profile";
 import DonationProfile from "../pages/dashboard/user/DonationProfile";
+import Donar from "../pages/root/donar/Donar";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "request",
         element: <Request></Request>,
+      },
+      {
+        path: "donar",
+        element: <Donar></Donar>,
       },
     ],
   },

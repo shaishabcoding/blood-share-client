@@ -47,7 +47,10 @@ const Dashboard = () => {
         <NavLink to="/dashboard/donation-profile">Donation profile</NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/payment/history">Payment History</NavLink>
+        <NavLink to="/dashboard/my-request">My Request</NavLink>
+      </li>
+      <li>
+        <NavLink to="/dashboard/my-donation">My Donation</NavLink>
       </li>
     </ul>
   );

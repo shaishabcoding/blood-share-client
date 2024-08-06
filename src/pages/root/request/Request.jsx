@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
 import axios from "../../../utils/Axios";
-import { BiDonateBlood } from "react-icons/bi";
 import RequestCard from "../components/RequestCard";
 import { FaArrowAltCircleDown } from "react-icons/fa";
 
 const Request = () => {
   const requests = axios.get("requests");
-  console.log(requests);
+
   return (
     <div className="w-full lg:p-6 lg:px-0 px-2 lg:mx-0 lg:rounded-lg lg:my-6 my-1 py-6">
       <h2 className="text-2xl lg:mt-10 lg:mb-12 lg:text-5xl font-semibold text-center mb-6">
-        All Request <BiDonateBlood className="inline" />
+        All Request ({30})
       </h2>
       <Link
         to="/dashboard/blood-request"

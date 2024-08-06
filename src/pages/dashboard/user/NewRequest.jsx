@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 // import useAuth from "../../../../hooks/useAuth";
-import axios from "../../../../utils/Axios";
+import axios from "../../../utils/Axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import Loading from "../../../../shared/loading/Loading";
+import Loading from "../../../shared/loading/Loading";
 import { BiSolidDonateBlood } from "react-icons/bi";
 
 const NewRequest = () => {
