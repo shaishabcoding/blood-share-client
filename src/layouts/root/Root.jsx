@@ -1,7 +1,8 @@
-import { Outlet, useNavigation } from "react-router-dom";
-import Navbar from "../shared/navbar/Navbar";
-import Footer from "../shared/footer/Footer";
-import Loading from "../shared/loading/Loading";
+import { Outlet } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import { useNavigation } from "react-router-dom";
+import Loading from "../../shared/loading/Loading";
 
 const Root = () => {
   const navigation = useNavigation();
@@ -9,9 +10,9 @@ const Root = () => {
 
   return (
     <div className="bg-white dark:bg-black dark:text-white font-open-sans">
-      <div className="lg:px-28 lg:pt-6">
+      <div className="lg:px-28 lg:pt-6 ">
         <Navbar></Navbar>
-        {loading && <Loading></Loading>}
+        {loading && <Loading />}
         <Outlet></Outlet>
       </div>
       <Footer></Footer>

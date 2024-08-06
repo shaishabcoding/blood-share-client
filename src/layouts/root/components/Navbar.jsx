@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { HiOutlineLogout } from "react-icons/hi";
 import { FiLogIn } from "react-icons/fi";
 import { CiDark, CiLight } from "react-icons/ci";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -120,7 +120,7 @@ const Navbar = () => {
                   {user?.displayName}
                 </span>
                 <li>
-                  <Link to="/dashboard/profile" className="font-medium">
+                  <Link to="/dashboard" className="font-medium">
                     Profile
                   </Link>
                 </li>
