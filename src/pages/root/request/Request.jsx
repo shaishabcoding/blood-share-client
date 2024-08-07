@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import axios from "../../../utils/Axios";
 import RequestCard from "../components/RequestCard";
 import { FaArrowAltCircleDown } from "react-icons/fa";
+import useBloodRequests from "../../../hooks/useBloodRequests";
 
 const Request = () => {
-  const requests = axios.get("requests");
+  const requests = useBloodRequests();
 
   return (
     <div className="w-full lg:p-6 lg:px-0 px-2 lg:mx-0 lg:rounded-lg lg:my-6 my-1 py-6">

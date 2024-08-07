@@ -1,9 +1,9 @@
 import RequestCard from "../../../../components/RequestCard";
-import axios from "../../../../../../utils/Axios";
+import useBloodRequests from "../../../../../../hooks/useBloodRequests";
 import { Link } from "react-router-dom";
 
 const RecentRequest = () => {
-  const requests = axios.get("requests");
+  const requests = useBloodRequests();
 
   return (
     <div>
