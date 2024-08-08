@@ -11,6 +11,7 @@ import NewRequest from "../pages/dashboard/user/NewRequest";
 import Profile from "../pages/dashboard/user/Profile";
 import DonationProfile from "../pages/dashboard/user/DonationProfile";
 import Donar from "../pages/root/donar/Donar";
+import MyRequest from "../pages/dashboard/user/MyRequest";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "blood-request",
         element: <NewRequest></NewRequest>,
+      },
+      {
+        path: "my-request",
+        element: <MyRequest></MyRequest>,
       },
     ],
   },

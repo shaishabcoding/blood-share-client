@@ -49,7 +49,7 @@ const NewRequest = () => {
   });
 
   return (
-    <div className="w-full lg:p-6 px-2 lg:mx-0 lg:rounded-lg lg:mt-6 bg-gradient-to-bl from-green-50 dark:from-gray-700 via-pink-50 dark:via-gray-800 to-sky-50 dark:to-gray-700 dark:text-white dark:border-gray-500">
+    <div className="w-full lg:p-6 px-2 lg:mx-0 lg:rounded-lg lg:mt-6">
       <h2 className="text-2xl lg:mb-12 lg:text-5xl font-semibold text-center mb-6">
         New Blood Request
       </h2>
