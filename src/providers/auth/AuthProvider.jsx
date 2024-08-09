@@ -7,10 +7,9 @@ import {
   updateProfile,
 } from "firebase/auth";
 import auth from "../../firebase/firebase.init";
-import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import { GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
-import axios from "axios";
+import usePublicClient from "../../hooks/usePublicClient";
 
 export const AuthContext = createContext(null);
 
@@ -19,6 +18,8 @@ const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
+  const publicClient = usePublicClient();
+
   const createUser = ({ email, password, name, image }, callback = null) => {
     setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password).then(({ user }) => {
@@ -26,8 +27,12 @@ const AuthProvider = ({ children }) => {
         displayName: name,
         photoURL: image,
       }).then(() => {
-        axios
-          .post("https://book-wise-316.vercel.app/jwt", { email })
+        publicClient
+          .post("/users", {
+            email: user?.email,
+            name: user?.displayName,
+            image: user?.photoURL,
+          })
           .then(({ data }) => {
             if (data.success) {
               callback && callback(user);
@@ -40,13 +45,7 @@ const AuthProvider = ({ children }) => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        axios
-          .post("https://book-wise-316.vercel.app/jwt", { email })
-          .then(({ data }) => {
-            if (data.success) {
-              callback && callback(user);
-            }
-          });
+        callback && callback(user);
       })
       .catch(() => {
         toast.error("Invalid email or password");
@@ -56,9 +55,7 @@ const AuthProvider = ({ children }) => {
     setIsLoading(true);
     try {
       auth.signOut().then(() => {
-        axios.post("https://book-wise-316.vercel.app/logout").then(() => {
-          toast.success("logout successfully");
-        });
+        localStorage.removeItem("access-token");
       });
     } catch (err) {
       toast.error(err);
@@ -74,8 +71,12 @@ const AuthProvider = ({ children }) => {
   const signUp = (provider, callback = null) => {
     signInWithPopup(auth, provider)
       .then(({ user }) => {
-        axios
-          .post("https://book-wise-316.vercel.app/jwt", { email: user.email })
+        publicClient
+          .post("/users", {
+            email: user?.email,
+            name: user?.displayName,
+            image: user?.photoURL,
+          })
           .then(({ data }) => {
             if (data.success) {
               callback && callback(user);
@@ -92,14 +93,24 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
-      console.log(user);
       setUser(user);
-      setIsLoading(false);
+      if (user) {
+        const userInfo = { email: user?.email };
+        publicClient.post("/jwt", userInfo).then(({ data }) => {
+          if (data?.token) {
+            localStorage.setItem("access-token", data.token);
+            setIsLoading(false);
+          }
+        });
+      } else {
+        localStorage.removeItem("access-token");
+        setIsLoading(false);
+      }
     });
     return () => {
       unSubscribe();
     };
-  }, []);
+  }, [publicClient]);
   const authInfo = {
     user,
     createUser,
@@ -115,7 +126,5 @@ const AuthProvider = ({ children }) => {
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
 };
-AuthProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+
 export default AuthProvider;

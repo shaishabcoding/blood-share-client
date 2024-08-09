@@ -1,20 +1,14 @@
 import { useForm } from "react-hook-form";
-// import useAuth from "../../../../hooks/useAuth";
-import axios from "../../../utils/Axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import Loading from "../../../shared/loading/Loading";
 import { BiSolidDonateBlood } from "react-icons/bi";
+import usePrivateClient from "../../../hooks/usePrivateClient";
+import useAuth from "../../../hooks/useAuth";
 
 const NewRequest = () => {
-  // const { user } = useAuth();
-  const { user } = {
-    user: {
-      displayName: "Shaishab Chandra Shil",
-      email: "shaishab316@gmail.com",
-      photoURL: "/logo.png",
-    },
-  }; /* ToDo: remove */
+  const privateClient = usePrivateClient();
+  const { user } = useAuth();
 
   const [loading, setLoading] = useState(false);
   const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
@@ -25,7 +19,6 @@ const NewRequest = () => {
     reset,
   } = useForm({
     defaultValues: {
-      email: user?.email,
       contactEmail: user?.email,
       patientName: user?.displayName,
       img: user?.photoURL,
@@ -34,8 +27,7 @@ const NewRequest = () => {
 
   const handleFormSubmit = handleSubmit(async (data) => {
     setLoading(true);
-    console.log(data);
-    const res = await axios.post("requests", data);
+    const res = await privateClient.post("blood-request/new", data);
     if (res.data.insertedId) {
       reset();
       Swal.fire({
@@ -224,15 +216,6 @@ const NewRequest = () => {
                 <p className="text-red-500">{errors.likes.message}</p>
               )}
             </div>
-            <label className="input hidden input-bordered items-center gap-2 dark:bg-gray-500 dark:border-gray-400">
-              Email
-              <input
-                type="email"
-                className="grow cursor-not-allowed"
-                {...register("email")}
-                disabled
-              />
-            </label>
             <label className="input hidden input-bordered items-center gap-2 dark:bg-gray-500 dark:border-gray-400">
               Img
               <input

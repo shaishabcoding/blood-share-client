@@ -4,8 +4,10 @@ import { HiOutlineLogout } from "react-icons/hi";
 import { FiLogIn } from "react-icons/fi";
 import { CiDark, CiLight } from "react-icons/ci";
 import useAuth from "../../../hooks/useAuth";
+import useDonars from "../../../hooks/useDonars";
 
 const Navbar = () => {
+  const [donars] = useDonars();
   const { user, logOut } = useAuth();
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -31,7 +33,7 @@ const Navbar = () => {
         <NavLink to="request">Request (20)</NavLink>
       </li>
       <li>
-        <NavLink to="donar">Donar (12)</NavLink>
+        <NavLink to="donar">Donar ({+donars?.length})</NavLink>
       </li>
       {user ? (
         <></>

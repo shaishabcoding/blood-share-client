@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "../../../utils/Axios";
 import { Link } from "react-router-dom";
+import useDonationProfile from "../../../hooks/useDonationProfile";
 
 const Profile = () => {
+  const [donationProfile, refetch] = useDonationProfile();
   const navigate = useNavigate();
   // const { user } = useAuth();
   const { user } = {
@@ -15,12 +16,12 @@ const Profile = () => {
   }; /* ToDo: remove */
 
   const [isDonationChecked, setDonationChecked] = useState(
-    !!axios.get("isDonationChecked")
+    donationProfile?.active
   );
 
   const handleCheckedChange = (e) => {
     setDonationChecked(e.target.checked);
-    if (e.target.checked) {
+    if (e.target.checked && !donationProfile) {
       navigate("/dashboard/donation-profile");
     }
   };
@@ -46,7 +47,12 @@ const Profile = () => {
       </label>
       <div className="flex gap-2 flex-wrap">
         {isDonationChecked && (
-          <Link className="btn btn-info btn-sm mt-2">Donation Profile</Link>
+          <Link
+            to="/dashboard/donation-profile"
+            className="btn btn-info btn-sm mt-2"
+          >
+            Donation Profile
+          </Link>
         )}
         <btn className="btn btn-primary btn-sm mt-2">Change Password</btn>
       </div>

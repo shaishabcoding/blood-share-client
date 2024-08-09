@@ -11,7 +11,7 @@ const DonarCard = ({ donar, idx }) => {
       <div className="h-full w-full flex items-center gap-2">
         <div className="avatar relative">
           <div className="w-16 mask mask-squircle bg-white dark:bg-gray-800">
-            <img src={donar.profile.img} />
+            <img src={donar.img} />
           </div>
           {idx === 0 && (
             <div className="w-12 absolute -top-6 -left-6 -rotate-45">
@@ -21,7 +21,7 @@ const DonarCard = ({ donar, idx }) => {
         </div>
         <div className="grow">
           <h3 className="text-xl font-semibold">
-            {donar.profile.name}{" "}
+            {donar.donarName}{" "}
             {donar.isActive && (
               <div className="badge badge-accent text-white">active</div>
             )}

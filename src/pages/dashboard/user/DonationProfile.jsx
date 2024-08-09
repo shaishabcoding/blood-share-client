@@ -1,23 +1,19 @@
 import { useForm } from "react-hook-form";
-// import useAuth from "../../../../hooks/useAuth";
-import axios from "../../../utils/Axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import Loading from "../../../shared/loading/Loading";
 import { BiSolidDonateBlood } from "react-icons/bi";
+import usePrivateClient from "../../../hooks/usePrivateClient";
+import useAuth from "../../../hooks/useAuth";
+import useDonationProfile from "../../../hooks/useDonationProfile";
+import { useEffect } from "react";
 
 const DonationProfile = () => {
-  // const { user } = useAuth();
-  const { user } = {
-    user: {
-      displayName: "Shaishab Chandra Shil",
-      email: "shaishab316@gmail.com",
-      photoURL: "/logo.png",
-    },
-  }; /* ToDo: remove */
-
+  const privateClient = usePrivateClient();
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+  const [donationProfile, refetch] = useDonationProfile();
   const {
     register,
     handleSubmit,
@@ -25,22 +21,30 @@ const DonationProfile = () => {
     reset,
   } = useForm({
     defaultValues: {
-      email: user?.email,
       contactEmail: user?.email,
       donarName: user?.displayName,
       img: user?.photoURL,
+      active: true,
     },
   });
 
+  useEffect(() => {
+    if (donationProfile) {
+      const newProfile = { ...donationProfile };
+      reset(newProfile);
+    }
+  }, [donationProfile, reset]);
+
   const handleFormSubmit = handleSubmit(async (data) => {
     setLoading(true);
-    console.log(data);
-    const res = await axios.post("requests", data);
-    if (res.data.insertedId) {
+    const res = await privateClient.patch("/donation-profile", data);
+    console.log(res);
+    if (res.data.modifiedCount > 0 || res.data.upsertedCount > 0) {
       reset();
+      refetch();
       Swal.fire({
         title: "Success",
-        text: "New Request successfully!",
+        text: "Update successfully!",
         icon: "success",
         confirmButtonText: "Done",
       });
@@ -112,20 +116,13 @@ const DonationProfile = () => {
                   errors.donations ? "border-red-500" : ""
                 }`}
               >
-                Time
+                Active
                 <input
-                  defaultValue={0}
-                  type="text"
-                  className="grow"
-                  placeholder="Enter Donation time [e.g.: 1]"
-                  {...register("donations", {
-                    required: "Please enter donation time",
-                  })}
+                  type="checkbox"
+                  className="checkbox checkbox-primary"
+                  {...register("active")}
                 />
               </label>
-              {errors.donations && (
-                <p className="text-red-500">{errors.donations.message}</p>
-              )}
             </div>
             <div>
               <label
@@ -135,11 +132,12 @@ const DonationProfile = () => {
               >
                 Quantity
                 <input
-                  type="text"
+                  defaultValue={0}
+                  type="number"
                   className="grow"
-                  placeholder="Enter Quantity [e.g.: 2]"
+                  placeholder="Enter Donation Quantity [e.g.: 2]"
                   {...register("quantity", {
-                    required: "Please enter quantity",
+                    required: "Please enter donation quantity",
                   })}
                 />
               </label>
@@ -155,7 +153,7 @@ const DonationProfile = () => {
               >
                 Last donate
                 <input
-                  type="date"
+                  type="datetime-local"
                   className="grow"
                   placeholder="Enter donation date"
                   {...register("time", {
@@ -227,15 +225,6 @@ const DonationProfile = () => {
               )}
             </div>
             <label className="input hidden input-bordered items-center gap-2 dark:bg-gray-500 dark:border-gray-400">
-              Email
-              <input
-                type="email"
-                className="grow cursor-not-allowed"
-                {...register("email")}
-                disabled
-              />
-            </label>
-            <label className="input hidden input-bordered items-center gap-2 dark:bg-gray-500 dark:border-gray-400">
               Img
               <input
                 type="text"
@@ -268,7 +257,7 @@ const DonationProfile = () => {
               <Loading className="my-0 text-primary" />
             ) : (
               <>
-                Donate <BiSolidDonateBlood />
+                Update <BiSolidDonateBlood />
               </>
             )}
           </button>
