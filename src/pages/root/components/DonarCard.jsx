@@ -22,7 +22,7 @@ const DonarCard = ({ donar, idx }) => {
         <div className="grow">
           <h3 className="text-xl font-semibold">
             {donar.donarName}{" "}
-            {donar.isActive && (
+            {donar.active && (
               <div className="badge badge-accent text-white">active</div>
             )}
           </h3>
@@ -31,7 +31,7 @@ const DonarCard = ({ donar, idx }) => {
             <span className="font-semibold">Quantity:</span> {donar.quantity}
             <br />
             <span className="font-semibold">Last donation:</span>{" "}
-            {moment(donar.time).fromNow()}
+            {moment(donar.lastDonate).fromNow()}
           </p>
         </div>
         <div className="-rotate-90">

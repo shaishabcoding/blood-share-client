@@ -2,27 +2,28 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useDonationProfile from "../../../hooks/useDonationProfile";
+import usePrivateClient from "../../../hooks/usePrivateClient";
+import useAuth from "../../../hooks/useAuth";
 
 const Profile = () => {
-  const [donationProfile, refetch] = useDonationProfile();
+  const privateClient = usePrivateClient();
+  const [donationProfile] = useDonationProfile();
   const navigate = useNavigate();
-  // const { user } = useAuth();
-  const { user } = {
-    user: {
-      displayName: "Shaishab Chandra Shil",
-      email: "shaishab316@gmail.com",
-      photoURL: "/logo.png",
-    },
-  }; /* ToDo: remove */
+  const { user } = useAuth();
 
   const [isDonationChecked, setDonationChecked] = useState(
     donationProfile?.active
   );
 
-  const handleCheckedChange = (e) => {
+  const handleCheckedChange = async (e) => {
     setDonationChecked(e.target.checked);
     if (e.target.checked && !donationProfile) {
       navigate("/dashboard/donation-profile");
+    }
+    if (donationProfile) {
+      await privateClient.patch("/donation-profile/active", {
+        active: e.target.checked,
+      });
     }
   };
 
@@ -54,7 +55,7 @@ const Profile = () => {
             Donation Profile
           </Link>
         )}
-        <btn className="btn btn-primary btn-sm mt-2">Change Password</btn>
+        <button className="btn btn-primary btn-sm mt-2">Change Password</button>
       </div>
     </div>
   );

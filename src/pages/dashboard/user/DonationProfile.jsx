@@ -7,6 +7,7 @@ import usePrivateClient from "../../../hooks/usePrivateClient";
 import useAuth from "../../../hooks/useAuth";
 import useDonationProfile from "../../../hooks/useDonationProfile";
 import { useEffect } from "react";
+import moment from "moment";
 
 const DonationProfile = () => {
   const privateClient = usePrivateClient();
@@ -25,6 +26,7 @@ const DonationProfile = () => {
       donarName: user?.displayName,
       img: user?.photoURL,
       active: true,
+      lastDonate: moment().subtract(56, "days").format("YYYY-MM-DDTHH:mm"),
     },
   });
 
@@ -38,7 +40,7 @@ const DonationProfile = () => {
   const handleFormSubmit = handleSubmit(async (data) => {
     setLoading(true);
     const res = await privateClient.patch("/donation-profile", data);
-    console.log(res);
+
     if (res.data.modifiedCount > 0 || res.data.upsertedCount > 0) {
       reset();
       refetch();
@@ -148,7 +150,7 @@ const DonationProfile = () => {
             <div>
               <label
                 className={`input input-bordered flex items-center gap-2 dark:bg-gray-500 dark:border-gray-400 ${
-                  errors.time ? "border-red-500" : ""
+                  errors.lastDonate ? "border-red-500" : ""
                 }`}
               >
                 Last donate
@@ -156,13 +158,13 @@ const DonationProfile = () => {
                   type="datetime-local"
                   className="grow"
                   placeholder="Enter donation date"
-                  {...register("time", {
+                  {...register("lastDonate", {
                     required: "Please enter last donation date",
                   })}
                 />
               </label>
-              {errors.time && (
-                <p className="text-red-500">{errors.time.message}</p>
+              {errors.lastDonate && (
+                <p className="text-red-500">{errors.lastDonate.message}</p>
               )}
             </div>
             <div>

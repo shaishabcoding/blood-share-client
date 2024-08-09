@@ -10,7 +10,6 @@ const useDonars = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await publicClient.get(`/donars`);
-      console.log(res.data);
       return res.data;
     },
   });

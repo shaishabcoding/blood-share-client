@@ -10,7 +10,6 @@ const useDonationProfile = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await privateClient.get(`/donation-profile`);
-      console.log(res.data);
       return res.data;
     },
   });

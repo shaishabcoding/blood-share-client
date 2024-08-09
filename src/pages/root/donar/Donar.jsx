@@ -5,7 +5,6 @@ import useDonars from "../../../hooks/useDonars";
 
 const Donar = () => {
   const [donars] = useDonars();
-  console.log(donars);
   return (
     <div className="w-full lg:p-6 lg:px-0 px-2 lg:mx-0 lg:rounded-lg lg:my-6 my-1 py-6">
       <h2 className="text-2xl lg:mt-10 lg:mb-12 lg:text-5xl font-semibold text-center mb-6">
