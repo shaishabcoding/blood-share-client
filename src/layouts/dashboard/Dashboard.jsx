@@ -5,13 +5,13 @@ import SideBar from "./components/SideBar";
 import { NavLink } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
 import Navbar from "./components/Navbar";
-import useRequests from "../../hooks/useRequests";
+import useMyRequests from "../../hooks/useMyRequests";
 
 const Dashboard = () => {
   const navigation = useNavigation();
   const loading = navigation.state === "loading";
   const [isAdmin] = useAdmin();
-  const [requests] = useRequests();
+  const [requests] = useMyRequests();
 
   const links = isAdmin ? (
     <ul className="menu menu-sm lg:menu-md">
