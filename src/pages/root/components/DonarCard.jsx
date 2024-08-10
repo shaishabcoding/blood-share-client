@@ -3,11 +3,11 @@ import moment from "moment";
 const DonarCard = ({ donar, idx }) => {
   return (
     <div
-      className={`overflow-hidden border border-gray-300 h-fit relative rounded-md ${
+      className={`overflow-visible border border-gray-300 h-fit relative rounded-md ${
         idx % 2 ? "bg-gradient-to-tl" : "bg-gradient-to-bl"
       } from-green-50 dark:from-gray-700 via-pink-50 dark:via-gray-800 to-sky-50 dark:to-gray-700 dark:text-white dark:border-gray-500`}
     >
-      <div className="collapse collapse-arrow join-item rounded-none">
+      <div className="collapse collapse-arrow join-item rounded-none overflow-visible">
         <input type="radio" name="donar-accordion" />
         <div className="collapse-title">
           <div className="h-full w-full flex items-center gap-2">
