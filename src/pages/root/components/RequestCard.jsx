@@ -40,9 +40,9 @@ const RequestCard = ({ request, idx }) => {
             </div>
           </div>
         </div>
-        <div className="collapse-content px-0 dark:text-gray-300 border-t border-gray-300 dark:border-gray-500">
-          <div className="px-4">
-            <p className="mt-4">
+        <div className="collapse-content px-0 dark:text-white border-t border-gray-300 dark:border-gray-500">
+          <div className="px-4 pt-3">
+            <p>
               <span className="font-semibold">Location:</span>{" "}
               {request?.location}
             </p>

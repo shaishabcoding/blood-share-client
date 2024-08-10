@@ -139,6 +139,7 @@ const DonationProfile = () => {
                   className="grow"
                   placeholder="Enter Donation Quantity [e.g.: 2]"
                   {...register("quantity", {
+                    valueAsNumber: true,
                     required: "Please enter donation quantity",
                   })}
                 />
