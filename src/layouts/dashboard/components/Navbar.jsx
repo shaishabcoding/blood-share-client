@@ -45,7 +45,10 @@ const Navbar = ({ links }) => {
           className="btn btn-ghost text-base font-bold md:px-4 px-0 md:text-xl"
         >
           <span className="flex gap-1 lg:gap-2 items-center">
-            <img className="w-[1.5em]" src="/logo.png" />{" "}
+            <img
+              className="w-[1.5em] dark:bg-white dark:mask dark:mask-squircle"
+              src="/logo.png"
+            />{" "}
             <span>Hi, {user.displayName.split(" ")[0].slice(0, 10)}</span>
           </span>
         </Link>

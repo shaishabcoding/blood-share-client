@@ -8,7 +8,7 @@ const Donar = () => {
   return (
     <div className="w-full lg:p-6 lg:px-0 px-2 lg:mx-0 lg:rounded-lg lg:my-6 my-1 py-6">
       <h2 className="text-2xl lg:mt-10 lg:mb-12 lg:text-5xl font-semibold text-center mb-6">
-        All Donar ({donars?.length})
+        All Donar ({donars?.length || 0})
       </h2>
       <Link
         to="/dashboard/donation-profile"

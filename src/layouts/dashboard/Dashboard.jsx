@@ -5,11 +5,13 @@ import SideBar from "./components/SideBar";
 import { NavLink } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
 import Navbar from "./components/Navbar";
+import useRequests from "../../hooks/useRequests";
 
 const Dashboard = () => {
   const navigation = useNavigation();
   const loading = navigation.state === "loading";
   const [isAdmin] = useAdmin();
+  const [requests] = useRequests();
 
   const links = isAdmin ? (
     <ul className="menu menu-sm lg:menu-md">
@@ -47,7 +49,9 @@ const Dashboard = () => {
         <NavLink to="/dashboard/donation-profile">Donation profile</NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/my-request">My Request</NavLink>
+        <NavLink to="/dashboard/my-request">
+          My Request ({requests?.length || 0})
+        </NavLink>
       </li>
       <li>
         <NavLink to="/dashboard/my-donation">My Donation</NavLink>
@@ -56,7 +60,7 @@ const Dashboard = () => {
   );
 
   return (
-    <div className="bg-white dark:bg-black dark:text-white font-open-sans">
+    <div className="bg-white h-screen dark:bg-black dark:text-white font-open-sans">
       <div className="md:hidden sticky top-0 z-50">
         <Navbar links={links} />
       </div>

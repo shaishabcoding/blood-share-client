@@ -5,9 +5,11 @@ import { FiLogIn } from "react-icons/fi";
 import { CiDark, CiLight } from "react-icons/ci";
 import useAuth from "../../../hooks/useAuth";
 import useDonars from "../../../hooks/useDonars";
+import useRequests from "../../../hooks/useRequests";
 
 const Navbar = () => {
   const [donars] = useDonars();
+  const [requests] = useRequests();
   const { user, logOut } = useAuth();
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -30,10 +32,10 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="request">Request (20)</NavLink>
+        <NavLink to="request">Request ({requests?.length || 0})</NavLink>
       </li>
       <li>
-        <NavLink to="donar">Donar ({+donars?.length})</NavLink>
+        <NavLink to="donar">Donar ({donars?.length || 0})</NavLink>
       </li>
       {user ? (
         <></>

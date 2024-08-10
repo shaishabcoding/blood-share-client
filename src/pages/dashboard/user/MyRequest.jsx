@@ -1,11 +1,11 @@
 import { RiDeleteBin6Fill } from "react-icons/ri";
-import useBloodRequests from "../../../hooks/useBloodRequests";
+import useRequests from "../../../hooks/useRequests";
 const MyRequest = () => {
-  const requests = useBloodRequests();
+  const [requests] = useRequests();
   return (
     <div className="w-full lg:p-6 px-2 lg:mx-0 lg:rounded-lg lg:mt-6">
       <h2 className="text-2xl lg:mb-12 lg:text-5xl font-semibold text-center mb-6">
-        My Request
+        My Request ({requests?.length || 0})
       </h2>
       <div className="overflow-x-auto rounded-md border">
         <table className="table table-xs md:table-md table-pin-rows table-pin-cols table-zebra bg-white">
@@ -20,7 +20,7 @@ const MyRequest = () => {
             </tr>
           </thead>
           <tbody>
-            {requests.map((request, idx) => {
+            {requests?.map((request, idx) => {
               const { patientName, bloodGroup, quantity, location } = request;
               return (
                 <tr

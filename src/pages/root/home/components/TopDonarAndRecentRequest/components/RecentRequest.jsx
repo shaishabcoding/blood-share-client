@@ -1,19 +1,19 @@
 import RequestCard from "../../../../components/RequestCard";
-import useBloodRequests from "../../../../../../hooks/useBloodRequests";
+import useRequests from "../../../../../../hooks/useRequests";
 import { Link } from "react-router-dom";
 
 const RecentRequest = () => {
-  const requests = useBloodRequests();
+  const [requests] = useRequests();
 
   return (
     <div>
       <h2 className="font-bold text-4xl mb-6 md:mb-10 text-primary">
         <Link to="request" className="link-hover">
-          Request ({15})
+          Request ({requests?.length || 0})
         </Link>
       </h2>
       <div className="flex flex-col gap-2">
-        {requests.map((request, idx) => (
+        {requests?.slice(0, 5).map((request, idx) => (
           <RequestCard key={idx} {...{ request, idx }} />
         ))}
       </div>

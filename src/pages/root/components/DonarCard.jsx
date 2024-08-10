@@ -28,10 +28,18 @@ const DonarCard = ({ donar, idx }) => {
           </h3>
           <p>
             <span className="font-semibold">Group:</span> {donar.bloodGroup} |{" "}
-            <span className="font-semibold">Quantity:</span> {donar.quantity}
+            <span className="font-semibold">Donations:</span> {donar.quantity}
             <br />
-            <span className="font-semibold">Last donation:</span>{" "}
-            {moment(donar.lastDonate).fromNow()}
+            {donar.quantity < 1 ? (
+              <>
+                <span>This is first donation</span>
+              </>
+            ) : (
+              <>
+                <span className="font-semibold">Last donation:</span>{" "}
+                {moment(donar.lastDonate).fromNow()}{" "}
+              </>
+            )}
           </p>
         </div>
         <div className="-rotate-90">
