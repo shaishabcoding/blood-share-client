@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import DonarCard from "../../../../components/DonarCard";
 import useDonars from "../../../../../../hooks/useDonars";
 const TopDonar = () => {
-  const [donars] = useDonars();
+  const [{ donars }] = useDonars();
 
   return (
     <div>

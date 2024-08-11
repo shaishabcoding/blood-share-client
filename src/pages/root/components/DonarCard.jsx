@@ -1,4 +1,7 @@
 import moment from "moment";
+import { FaPhone } from "react-icons/fa";
+import { HiLocationMarker } from "react-icons/hi";
+import { MdBloodtype, MdEmail } from "react-icons/md";
 
 const DonarCard = ({ donar, idx }) => {
   return (
@@ -28,11 +31,15 @@ const DonarCard = ({ donar, idx }) => {
                   <div className="badge badge-accent text-white">active</div>
                 )}
               </h3>
-              <p>
-                <span className="font-semibold">Group:</span> {donar.bloodGroup}{" "}
+              <p className="flex gap-1 items-center">
+                <span>
+                  <MdBloodtype className="inline font-semibold" />{" "}
+                  {donar.bloodGroup}
+                </span>{" "}
                 | <span className="font-semibold">Donations:</span>{" "}
                 {donar.quantity}
-                <br />
+              </p>
+              <p>
                 {donar.quantity < 1 ? (
                   <>
                     <span>This is first donation</span>
@@ -49,17 +56,24 @@ const DonarCard = ({ donar, idx }) => {
         </div>
         <div className="collapse-content px-0 dark:text-white border-t border-gray-300 dark:border-gray-500">
           <div className="px-4 pt-3">
-            <p>
-              <span className="font-semibold">Location:</span> {donar?.location}
+            <p className="flex gap-2 items-center">
+              <HiLocationMarker /> {donar?.location}
             </p>
-            <p>
-              <span className="font-semibold">Contact Number:</span>{" "}
-              {donar?.contactNumber}
+            <p className="flex gap-2 items-center">
+              <FaPhone />
+              <a className="link-hover" href={`tel:${donar?.contactNumber}`}>
+                {donar?.contactNumber}
+              </a>
             </p>
             {donar?.contactEmail && (
-              <p>
-                <span className="font-semibold">Contact Email:</span>{" "}
-                {donar?.contactEmail}
+              <p className="flex gap-2 items-center">
+                <MdEmail />
+                <a
+                  className="link-hover"
+                  href={`mailto:${donar?.contactEmail}`}
+                >
+                  {donar?.contactEmail}
+                </a>
               </p>
             )}
           </div>
@@ -69,52 +83,6 @@ const DonarCard = ({ donar, idx }) => {
         </div>
       </div>
     </div>
-    // <div
-    //   className={`border p-3 rounded-md hover:scale-95 ${
-    //     idx % 2 ? "bg-gradient-to-tl" : "bg-gradient-to-bl"
-    //   } from-green-50 dark:from-gray-700 via-pink-50 dark:via-gray-800 to-sky-50 dark:to-gray-700 dark:text-white dark:border-gray-500`}
-    // >
-    //   <div className="h-full w-full flex items-center gap-2">
-    //     <div className="avatar relative">
-    //       <div className="w-16 mask mask-squircle bg-white dark:bg-gray-800">
-    //         <img src={donar.img} />
-    //       </div>
-    //       {idx === 0 && (
-    //         <div className="w-12 absolute -top-6 -left-6 -rotate-45">
-    //           <img src="/crown.png" />
-    //         </div>
-    //       )}
-    //     </div>
-    //     <div className="grow">
-    //       <h3 className="text-xl font-semibold">
-    //         {donar.donarName}{" "}
-    //         {donar.active && (
-    //           <div className="badge badge-accent text-white">active</div>
-    //         )}
-    //       </h3>
-    //       <p>
-    //         <span className="font-semibold">Group:</span> {donar.bloodGroup} |{" "}
-    //         <span className="font-semibold">Donations:</span> {donar.quantity}
-    //         <br />
-    //         {donar.quantity < 1 ? (
-    //           <>
-    //             <span>This is first donation</span>
-    //           </>
-    //         ) : (
-    //           <>
-    //             <span className="font-semibold">Last donation:</span>{" "}
-    //             {moment(donar.lastDonate).fromNow()}{" "}
-    //           </>
-    //         )}
-    //       </p>
-    //     </div>
-    //     <div className="-rotate-90">
-    //       <div className="text-3xl animate-bounce">
-    //         <FaArrowAltCircleDown />
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 
