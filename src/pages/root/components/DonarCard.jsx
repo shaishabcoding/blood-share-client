@@ -34,10 +34,12 @@ const DonarCard = ({ donar, idx }) => {
               <p className="flex gap-1 items-center">
                 <span>
                   <MdBloodtype className="inline font-semibold" />{" "}
-                  {donar.bloodGroup}
+                  {donar?.bloodGroup}
                 </span>{" "}
-                | <span className="font-semibold">Donations:</span>{" "}
-                {donar.quantity}
+                |{" "}
+                <span className="flex gap-1 items-center">
+                  <HiLocationMarker /> {donar?.location}
+                </span>
               </p>
               <p>
                 {donar.quantity < 1 ? (
@@ -57,7 +59,8 @@ const DonarCard = ({ donar, idx }) => {
         <div className="collapse-content px-0 dark:text-white border-t border-gray-300 dark:border-gray-500">
           <div className="px-4 pt-3">
             <p className="flex gap-2 items-center">
-              <HiLocationMarker /> {donar?.location}
+              <span className="font-semibold">Donations Quantity:</span>{" "}
+              {donar.quantity}
             </p>
             <p className="flex gap-2 items-center">
               <FaPhone />

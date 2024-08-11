@@ -50,7 +50,7 @@ const Dashboard = () => {
       </li>
       <li>
         <NavLink to="/dashboard/my-request">
-          My Request ({requests?.length || 0})
+          My Request ({requests?.length})
         </NavLink>
       </li>
       <li>

@@ -1,4 +1,7 @@
 import Countdown from "react-countdown";
+import { FaPhone } from "react-icons/fa";
+import { HiLocationMarker } from "react-icons/hi";
+import { MdBloodtype, MdEmail } from "react-icons/md";
 
 const RequestCard = ({ request, idx }) => {
   return (
@@ -26,12 +29,17 @@ const RequestCard = ({ request, idx }) => {
                   <div className="badge badge-error text-white">Urgent</div>
                 )}
               </h3>
+              <p className="flex gap-1 items-center">
+                <span>
+                  <MdBloodtype className="inline font-semibold" />{" "}
+                  {request?.bloodGroup}
+                </span>{" "}
+                |{" "}
+                <span className="flex gap-1 items-center">
+                  <HiLocationMarker /> {request?.location}
+                </span>
+              </p>
               <p>
-                <span className="font-semibold">Group:</span>{" "}
-                {request?.bloodGroup} |{" "}
-                <span className="font-semibold">Quantity:</span>{" "}
-                {request?.quantity}
-                <br />
                 <span className="font-semibold">Time:</span>{" "}
                 <Countdown date={request?.time}>
                   <span className="text-error font-bold">Over 😣</span>
@@ -42,18 +50,25 @@ const RequestCard = ({ request, idx }) => {
         </div>
         <div className="collapse-content px-0 dark:text-white border-t border-gray-300 dark:border-gray-500">
           <div className="px-4 pt-3">
-            <p>
-              <span className="font-semibold">Location:</span>{" "}
-              {request?.location}
+            <p className="flex gap-2 items-center">
+              <span className="font-semibold">Blood Quantity:</span>{" "}
+              {request?.quantity}
             </p>
-            <p>
-              <span className="font-semibold">Contact Number:</span>{" "}
-              {request?.contactNumber}
+            <p className="flex gap-2 items-center">
+              <FaPhone />
+              <a className="link-hover" href={`tel:${request?.contactNumber}`}>
+                {request?.contactNumber}
+              </a>
             </p>
             {request?.contactEmail && (
-              <p>
-                <span className="font-semibold">Contact Email:</span>{" "}
-                {request?.contactEmail}
+              <p className="flex gap-2 items-center">
+                <MdEmail />
+                <a
+                  className="link-hover"
+                  href={`mailto:${request?.contactEmail}`}
+                >
+                  {request?.contactEmail}
+                </a>
               </p>
             )}
           </div>

@@ -5,9 +5,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCards } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-cards";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+  const navigate = useNavigate();
   const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+  const { register, handleSubmit } = useForm();
 
   const imgs = [
     "https://images.healthshots.com/healthshots/en/uploads/2022/06/14090406/blood-donor-370x207.jpg",
@@ -15,6 +19,11 @@ const Banner = () => {
     "https://media.assettype.com/tnm%2Fimport%2Fsites%2Fdefault%2Ffiles%2Fblood-donation-21032021-AhmadArdity-Pixabay-1200.jpg?w=480&auto=format%2Ccompress&fit=max",
     "https://images.newscientist.com/wp-content/uploads/2023/01/30205513/SEI_142285830.jpg?crop=16:9,smart&width=1200&height=675&upscale=true",
   ];
+
+  const handleFormSubmit = handleSubmit(({ bloodGroup }) => {
+    const query = bloodGroup === "default" ? "" : bloodGroup;
+    navigate("donar?bloodGroup=" + query);
+  });
 
   return (
     <div className="hero lg:min-h-screen my-1 lg:rounded-lg lg:mt-6 lg:mb-10 md:py-10 bg-gradient-to-bl from-green-50 dark:from-gray-700 via-pink-50 dark:via-gray-800 to-sky-50 dark:to-gray-700 dark:text-white dark:border-gray-500">
@@ -55,8 +64,9 @@ const Banner = () => {
             everyone. Together, we can save lives and make a real difference in
             our community. Sign up now to donate blood and become a hero today!
           </p>
-          <div className="join w-full">
+          <form onSubmit={handleFormSubmit} className="join w-full">
             <select
+              {...register("bloodGroup")}
               defaultValue="default"
               className="select grow md:grow-0 select-bordered join-item border-primary dark:border-primary-light bg-white dark:bg-gray-400"
             >
@@ -75,7 +85,7 @@ const Banner = () => {
                 Search <FaSearch />
               </button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ import useRequests from "../../../hooks/useRequests";
 
 const Navbar = () => {
   const [{ donarsCount }] = useDonars();
-  const [requests] = useRequests();
+  const [{ requestsCount }] = useRequests();
   const { user, logOut } = useAuth();
   const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -32,10 +32,10 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="request">Request ({requests?.length || 0})</NavLink>
+        <NavLink to="request">Request ({requestsCount})</NavLink>
       </li>
       <li>
-        <NavLink to="donar">Donar ({donarsCount || 0})</NavLink>
+        <NavLink to="donar">Donar ({donarsCount})</NavLink>
       </li>
       {user ? (
         <></>

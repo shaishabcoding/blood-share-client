@@ -5,8 +5,10 @@ import Loading from "../../../shared/loading/Loading";
 import { BiSolidDonateBlood } from "react-icons/bi";
 import usePrivateClient from "../../../hooks/usePrivateClient";
 import useAuth from "../../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const NewRequest = () => {
+  const navigate = useNavigate();
   const privateClient = usePrivateClient();
   const { user } = useAuth();
 
@@ -32,9 +34,13 @@ const NewRequest = () => {
       reset();
       Swal.fire({
         title: "Success",
-        text: "New Request successfully!",
+        text: "Click Search button to find donar.",
         icon: "success",
-        confirmButtonText: "Done",
+        confirmButtonText: "Search Donar?",
+      }).then(() => {
+        navigate(
+          `/donar?bloodGroup=${data.bloodGroup}&location=${data.location}`
+        );
       });
     }
     setLoading(false);

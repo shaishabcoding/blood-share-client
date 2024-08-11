@@ -42,7 +42,7 @@ const MyRequest = () => {
   return (
     <div className="w-full lg:p-6 px-2 lg:mx-0 lg:rounded-lg lg:mt-6">
       <h2 className="text-2xl lg:mb-12 lg:text-5xl font-semibold text-center mb-6">
-        My Request ({requests?.length || 0})
+        My Request ({requests?.length})
       </h2>
       <div className="overflow-x-auto rounded-md border">
         <table className="table table-xs md:table-md table-pin-rows table-pin-cols table-zebra bg-white">

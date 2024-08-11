@@ -8,7 +8,7 @@ const TopDonar = () => {
     <div>
       <h2 className="font-bold text-4xl mb-6 md:mb-10 text-primary">
         <Link to="donar" className="link-hover">
-          Donar ({donars?.length || 0})
+          Donar ({donars?.length})
         </Link>
       </h2>
       <div className="flex flex-col gap-2">

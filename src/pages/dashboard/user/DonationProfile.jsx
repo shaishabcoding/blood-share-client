@@ -8,8 +8,10 @@ import useAuth from "../../../hooks/useAuth";
 import useDonationProfile from "../../../hooks/useDonationProfile";
 import { useEffect } from "react";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 const DonationProfile = () => {
+  const navigate = useNavigate();
   const privateClient = usePrivateClient();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -46,9 +48,13 @@ const DonationProfile = () => {
       refetch();
       Swal.fire({
         title: "Success",
-        text: "Update successfully!",
+        text: "Click Search button to find blood requests.",
         icon: "success",
-        confirmButtonText: "Done",
+        confirmButtonText: "Search requests?",
+      }).then(() => {
+        navigate(
+          `/request?bloodGroup=${data.bloodGroup}&location=${data.location}`
+        );
       });
     }
     setLoading(false);
