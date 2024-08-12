@@ -8,11 +8,12 @@ import useUsers from "../../hooks/useUsers";
 import Navbar from "./components/Navbar";
 import useMyRequests from "../../hooks/useMyRequests";
 import useDonars from "../../hooks/useDonars";
+import useRequests from "../../hooks/useRequests";
 
 const Dashboard = () => {
   const [{ usersCount }] = useUsers();
   const [{ donarsCount }] = useDonars();
-
+  const [{ requestsCount }] = useRequests();
   const navigation = useNavigation();
   const loading = navigation.state === "loading";
   const [isAdmin] = useAdmin();
@@ -43,7 +44,9 @@ const Dashboard = () => {
             <NavLink to="admin/donars">Menage Donars ({donarsCount})</NavLink>
           </li>
           <li>
-            <NavLink to="admin/requests">Menage Requests</NavLink>
+            <NavLink to="admin/requests">
+              Menage Requests ({requestsCount})
+            </NavLink>
           </li>
         </>
       )}

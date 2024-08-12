@@ -15,6 +15,7 @@ import Donar from "../pages/root/donar/Donar";
 import MyRequest from "../pages/dashboard/user/MyRequest";
 import ManageUsers from "../pages/dashboard/admin/ManageUsers";
 import ManageDonars from "../pages/dashboard/admin/ManageDonars";
+import ManageRequests from "../pages/dashboard/admin/ManageRequests";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
           {
             path: "donars",
             element: <ManageDonars></ManageDonars>,
+          },
+          {
+            path: "requests",
+            element: <ManageRequests></ManageRequests>,
           },
         ],
       },
