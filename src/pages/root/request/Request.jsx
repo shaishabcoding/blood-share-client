@@ -18,8 +18,6 @@ const Request = () => {
   const handleFormSubmit = handleSubmit(({ bloodGroup, location }) => {
     setBloodGroup(bloodGroup);
     setLocation(location);
-    query?.set("location", location);
-    query?.set("bloodGroup", bloodGroup);
   });
 
   return (
@@ -72,8 +70,6 @@ const Request = () => {
                 reset();
                 setLocation("");
                 setBloodGroup("");
-                query.delete("location");
-                query.delete("bloodGroup");
               }}
               className="btn bg-red-400 dark:bg-gray-500 text-white w-fit aspect-square btn-bordered rounded-none rounded-b-md rounded-br-none btn-sm md:btn-md"
               placeholder="Search meals"

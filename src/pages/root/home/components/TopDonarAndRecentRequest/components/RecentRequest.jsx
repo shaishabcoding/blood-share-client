@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const RecentRequest = () => {
   const [{ requests, requestsCount }] = useRequests();
 
-  console.log(requests);
   return (
     <div>
       <h2 className="font-bold text-4xl mb-6 md:mb-10 text-primary">
