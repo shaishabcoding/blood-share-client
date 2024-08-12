@@ -4,10 +4,15 @@ import Loading from "../../shared/loading/Loading";
 import SideBar from "./components/SideBar";
 import { NavLink } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
+import useUsers from "../../hooks/useUsers";
 import Navbar from "./components/Navbar";
 import useMyRequests from "../../hooks/useMyRequests";
+import useDonars from "../../hooks/useDonars";
 
 const Dashboard = () => {
+  const [{ usersCount }] = useUsers();
+  const [{ donarsCount }] = useDonars();
+
   const navigation = useNavigation();
   const loading = navigation.state === "loading";
   const [isAdmin] = useAdmin();
@@ -28,14 +33,14 @@ const Dashboard = () => {
         <NavLink to="my-request">My Request ({requests?.length})</NavLink>
       </li>
       {/* admin route */}
-
       {isAdmin && (
         <>
+          <div className="border-t pt-1 mt-1 border-gray-300 dark:border-gray-500"></div>
           <li>
-            <NavLink to="admin/users">Manage Users</NavLink>
+            <NavLink to="admin/users">Manage Users ({usersCount})</NavLink>
           </li>
           <li>
-            <NavLink to="admin/donars">Menage Donars</NavLink>
+            <NavLink to="admin/donars">Menage Donars ({donarsCount})</NavLink>
           </li>
           <li>
             <NavLink to="admin/requests">Menage Requests</NavLink>

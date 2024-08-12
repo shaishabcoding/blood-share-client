@@ -1,4 +1,5 @@
-import moment from "moment";
+import Countdown from "react-countdown";
+import { FaClock } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 const RequestTable = ({ requests }) => {
@@ -12,7 +13,7 @@ const RequestTable = ({ requests }) => {
             <th>Patient Name</th>
             <th>Blood Group</th>
             <th>Location</th>
-            <th>Last Donate</th>
+            <th>Time</th>
             <th>Type</th>
             <th>Contact Number</th>
             <th>Contact Email</th>
@@ -44,9 +45,14 @@ const RequestTable = ({ requests }) => {
                 <td>{request?.bloodGroup}</td>
                 <td>{request?.location}</td>
                 <td>
-                  {request.quantity < 1
-                    ? "This is first donation"
-                    : moment(request?.lastDonate).fromNow()}
+                  <p className="flex gap-1 items-center">
+                    <FaClock className="inline font-semibold" />
+                    <Countdown date={request?.time}>
+                      <span className="text-error font-bold">
+                        Over 😣 | {new Date(request?.time).toLocaleDateString()}
+                      </span>
+                    </Countdown>
+                  </p>
                 </td>
                 <td>{request?.type}</td>
                 <td>{request?.contactNumber}</td>
