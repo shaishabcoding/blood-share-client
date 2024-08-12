@@ -5,6 +5,9 @@ import useDonars from "../../../hooks/useDonars";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
+import DonarTable from "../components/DonarTable";
+import { FaTableList } from "react-icons/fa6";
+import { BsFillGrid3X3GapFill } from "react-icons/bs";
 
 const Donar = () => {
   const [query] = useSearchParams();
@@ -15,6 +18,7 @@ const Donar = () => {
   );
   const [{ donars, donarsCount }] = useDonars({ location, bloodGroup });
   const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+  const [viewType, setViewType] = useState("card"); //card | table
 
   const handleFormSubmit = handleSubmit(({ bloodGroup, location }) => {
     setBloodGroup(bloodGroup);
@@ -68,30 +72,43 @@ const Donar = () => {
           <div className="w-full flex">
             <button
               onClick={() => {
-                reset();
-                setLocation("");
-                setBloodGroup("");
+                setViewType(viewType === "card" ? "table" : "card");
               }}
-              className="btn bg-red-400 dark:bg-gray-500 text-white w-fit aspect-square btn-bordered rounded-none rounded-b-md rounded-br-none btn-sm md:btn-md"
+              className="btn bg-green-400 dark:bg-gray-500 text-white w-fit aspect-square btn-bordered rounded-none rounded-b-md rounded-br-none btn-sm md:btn-md"
               placeholder="Search meals"
             >
-              X
+              {viewType === "card" ? <FaTableList /> : <BsFillGrid3X3GapFill />}
             </button>
             <button
               type="submit"
-              className="btn bg-sky-400 dark:bg-gray-500 text-white grow btn-bordered rounded-none rounded-b-md rounded-bl-none btn-sm md:btn-md"
+              className="btn bg-sky-400 dark:bg-gray-500 text-white grow btn-bordered rounded-none rounded-b-none btn-sm md:btn-md"
               placeholder="Search meals"
             >
               Search
             </button>
+            <button
+              onClick={() => {
+                reset({ bloodGroup: "", location: "" });
+                setLocation("");
+                setBloodGroup("");
+              }}
+              className="btn bg-red-400 dark:bg-gray-500 text-white w-fit aspect-square btn-bordered rounded-none rounded-b-md rounded-bl-none btn-sm md:btn-md"
+              placeholder="Search meals"
+            >
+              X
+            </button>
           </div>
         </div>
       </form>
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:my-10 md:gap-4 px-1 my-6 gap-3 lg:gap-6 lg:px-0">
-        {donars?.map((donar, idx) => (
-          <DonarCard {...{ donar, idx }} key={idx} />
-        ))}
-      </div>
+      {viewType === "card" && (
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:my-10 md:gap-4 px-1 my-6 gap-3 lg:gap-6 lg:px-0">
+          {donars?.map((donar, idx) => (
+            <DonarCard {...{ donar, idx }} key={idx} />
+          ))}
+        </div>
+      )}
+
+      {viewType === "table" && <DonarTable {...{ donars }} />}
     </div>
   );
 };

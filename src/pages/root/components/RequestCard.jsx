@@ -14,7 +14,7 @@ const RequestCard = ({ request, idx }) => {
         <input type="radio" name="request-accordion" />
         <div className="collapse-title">
           <div className="h-full w-full flex items-center gap-2">
-            <div className="avatar relative">
+            <div className="avatar drop-shadow-md relative">
               <div className="w-16 mask mask-squircle z-10 bg-white dark:bg-gray-800">
                 <img src={request?.img} />
               </div>

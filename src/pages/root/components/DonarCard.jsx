@@ -14,7 +14,7 @@ const DonarCard = ({ donar, idx }) => {
         <input type="radio" name="donar-accordion" />
         <div className="collapse-title">
           <div className="h-full w-full flex items-center gap-2">
-            <div className="avatar relative">
+            <div className="avatar drop-shadow-md relative">
               <div className="w-16 mask mask-squircle bg-white dark:bg-gray-800">
                 <img src={donar.img} />
               </div>
@@ -49,7 +49,7 @@ const DonarCard = ({ donar, idx }) => {
                 ) : (
                   <>
                     <span className="font-semibold">Last donation:</span>{" "}
-                    {moment(donar.lastDonate).fromNow()}{" "}
+                    {moment(donar?.lastDonate).fromNow()}{" "}
                   </>
                 )}
               </p>
