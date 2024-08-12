@@ -1,5 +1,5 @@
 import Countdown from "react-countdown";
-import { FaPhone } from "react-icons/fa";
+import { FaClock, FaPhone } from "react-icons/fa";
 import { HiLocationMarker } from "react-icons/hi";
 import { MdBloodtype, MdEmail } from "react-icons/md";
 
@@ -39,10 +39,12 @@ const RequestCard = ({ request, idx }) => {
                   <HiLocationMarker /> {request?.location}
                 </span>
               </p>
-              <p>
-                <span className="font-semibold">Time:</span>{" "}
+              <p className="flex gap-1 items-center">
+                <FaClock className="inline font-semibold" />
                 <Countdown date={request?.time}>
-                  <span className="text-error font-bold">Over 😣</span>
+                  <span className="text-error font-bold">
+                    Over 😣 | {new Date(request?.time).toLocaleDateString()}
+                  </span>
                 </Countdown>
               </p>
             </div>

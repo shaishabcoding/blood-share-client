@@ -27,7 +27,7 @@ const MyRequest = () => {
             setDeleteLoading([false, id]);
             Swal.fire({
               title: "Success",
-              text: "Meal delete successfully!",
+              text: "Blood request delete successfully!",
               icon: "success",
               confirmButtonText: "Done",
             });

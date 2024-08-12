@@ -53,9 +53,6 @@ const Dashboard = () => {
           My Request ({requests?.length})
         </NavLink>
       </li>
-      <li>
-        <NavLink to="/dashboard/my-donation">My Donation</NavLink>
-      </li>
     </ul>
   );
 
