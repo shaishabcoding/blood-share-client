@@ -5,6 +5,9 @@ import useRequests from "../../../hooks/useRequests";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router-dom";
 import { useState } from "react";
+import { FaTableList } from "react-icons/fa6";
+import { BsFillGrid3X3GapFill } from "react-icons/bs";
+import RequestTable from "../components/RequestTable";
 
 const Request = () => {
   const [query] = useSearchParams();
@@ -13,6 +16,7 @@ const Request = () => {
   const [bloodGroup, setBloodGroup] = useState(
     query?.get("bloodGroup")?.replace(" ", "+") || ""
   );
+  const [viewType, setViewType] = useState("card"); //card | table
   const [{ requests, requestsCount }] = useRequests({ location, bloodGroup });
   const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
   const handleFormSubmit = handleSubmit(({ bloodGroup, location }) => {
@@ -67,30 +71,46 @@ const Request = () => {
           <div className="w-full flex">
             <button
               onClick={() => {
-                reset();
-                setLocation("");
-                setBloodGroup("");
+                setViewType(viewType === "card" ? "table" : "card");
               }}
-              className="btn bg-red-400 dark:bg-gray-500 text-white w-fit aspect-square btn-bordered rounded-none rounded-b-md rounded-br-none btn-sm md:btn-md"
+              className="btn bg-green-400 dark:bg-gray-500 text-white w-fit aspect-square btn-bordered rounded-none rounded-b-md rounded-br-none btn-sm md:btn-md p-0"
               placeholder="Search meals"
             >
-              X
+              {viewType === "card" ? <FaTableList /> : <BsFillGrid3X3GapFill />}
             </button>
+
             <button
               type="submit"
-              className="btn bg-sky-400 dark:bg-gray-500 text-white grow btn-bordered rounded-none rounded-b-md rounded-bl-none btn-sm md:btn-md"
+              className="btn bg-sky-400 dark:bg-gray-500 text-white grow btn-bordered rounded-none rounded-b-none btn-sm md:btn-md"
               placeholder="Search meals"
             >
               Search
             </button>
+            <button
+              onClick={() => {
+                reset();
+                setLocation("");
+                setBloodGroup("");
+              }}
+              className="btn bg-red-400 dark:bg-gray-500 text-white w-fit aspect-square btn-bordered rounded-none rounded-b-md rounded-bl-none btn-sm md:btn-md"
+              placeholder="Search meals"
+            >
+              X
+            </button>
           </div>
         </div>
       </form>
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:my-10 md:gap-4 px-1 my-6 gap-3 lg:gap-6 lg:px-0">
-        {requests?.map((request, idx) => (
-          <RequestCard {...{ request, idx }} key={idx} />
-        ))}
-      </div>
+      {requests?.length < 1 ? (
+        <>No request found</>
+      ) : viewType === "card" ? (
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:my-10 md:gap-4 px-1 my-6 gap-3 lg:gap-6 lg:px-0">
+          {requests?.map((request, idx) => (
+            <RequestCard {...{ request, idx }} key={idx} />
+          ))}
+        </div>
+      ) : (
+        <RequestTable {...{ requests }} />
+      )}
     </div>
   );
 };

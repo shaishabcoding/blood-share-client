@@ -74,7 +74,7 @@ const Donar = () => {
               onClick={() => {
                 setViewType(viewType === "card" ? "table" : "card");
               }}
-              className="btn bg-green-400 dark:bg-gray-500 text-white w-fit aspect-square btn-bordered rounded-none rounded-b-md rounded-br-none btn-sm md:btn-md"
+              className="btn bg-green-400 dark:bg-gray-500 text-white w-fit aspect-square btn-bordered rounded-none rounded-b-md rounded-br-none btn-sm md:btn-md p-0"
               placeholder="Search meals"
             >
               {viewType === "card" ? <FaTableList /> : <BsFillGrid3X3GapFill />}
@@ -100,15 +100,17 @@ const Donar = () => {
           </div>
         </div>
       </form>
-      {viewType === "card" && (
+      {donars?.length < 1 ? (
+        <>No donar found</>
+      ) : viewType === "card" ? (
         <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:my-10 md:gap-4 px-1 my-6 gap-3 lg:gap-6 lg:px-0">
           {donars?.map((donar, idx) => (
             <DonarCard {...{ donar, idx }} key={idx} />
           ))}
         </div>
+      ) : (
+        <DonarTable {...{ donars }} />
       )}
-
-      {viewType === "table" && <DonarTable {...{ donars }} />}
     </div>
   );
 };
