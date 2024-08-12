@@ -53,7 +53,7 @@ const DonationProfile = () => {
         confirmButtonText: "Search requests?",
       }).then(() => {
         navigate(
-          `/request?bloodGroup=${data.bloodGroup}&location=${data.location}`
+          `/requests?bloodGroup=${data.bloodGroup}&location=${data.location}`
         );
       });
     }

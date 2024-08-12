@@ -22,7 +22,7 @@ const Banner = () => {
 
   const handleFormSubmit = handleSubmit(({ bloodGroup }) => {
     const query = bloodGroup === "default" ? "" : bloodGroup;
-    navigate("donar?bloodGroup=" + query);
+    navigate("donars?bloodGroup=" + query);
   });
 
   return (

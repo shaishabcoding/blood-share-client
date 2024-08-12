@@ -39,7 +39,7 @@ const NewRequest = () => {
         confirmButtonText: "Search Donar?",
       }).then(() => {
         navigate(
-          `/donar?bloodGroup=${data.bloodGroup}&location=${data.location}`
+          `/donars?bloodGroup=${data.bloodGroup}&location=${data.location}`
         );
       });
     }

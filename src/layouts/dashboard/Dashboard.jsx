@@ -13,46 +13,35 @@ const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const [requests] = useMyRequests();
 
-  const links = isAdmin ? (
+  const links = (
     <ul className="menu menu-sm lg:menu-md">
       <li>
-        <NavLink to="/dashboard/admin">Admin Profile</NavLink>
+        <NavLink to="profile">My Profile</NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/users">Manage Users</NavLink>
+        <NavLink to="blood-request">Blood Request</NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/meals/new">Add Meal</NavLink>
+        <NavLink to="donation-profile">Donation Profile</NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/meals/all">All Meals</NavLink>
+        <NavLink to="my-request">My Request ({requests?.length})</NavLink>
       </li>
-      <li>
-        <NavLink to="/dashboard/meals/reviews">All Reviews</NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/meals/serve">Serve Meals</NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/meals/upcoming">Upcoming Meals</NavLink>
-      </li>
-    </ul>
-  ) : (
-    <ul className="menu menu-sm lg:menu-md">
-      <li>
-        <NavLink to="/dashboard/profile">My Profile</NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/blood-request">Blood request</NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/donation-profile">Donation profile</NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/my-request">
-          My Request ({requests?.length})
-        </NavLink>
-      </li>
+      {/* admin route */}
+
+      {isAdmin && (
+        <>
+          <li>
+            <NavLink to="admin/users">Manage Users</NavLink>
+          </li>
+          <li>
+            <NavLink to="admin/donars">Menage Donars</NavLink>
+          </li>
+          <li>
+            <NavLink to="admin/requests">Menage Requests</NavLink>
+          </li>
+        </>
+      )}
     </ul>
   );
 

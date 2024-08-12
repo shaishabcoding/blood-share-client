@@ -8,7 +8,7 @@ const RecentRequest = () => {
   return (
     <div>
       <h2 className="font-bold text-4xl mb-6 md:mb-10 text-primary">
-        <Link to="request" className="link-hover">
+        <Link to="requests" className="link-hover">
           Request ({requestsCount})
         </Link>
       </h2>

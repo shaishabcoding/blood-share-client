@@ -1,9 +1,10 @@
-import { Navigate, createBrowserRouter } from "react-router-dom";
+import { Navigate, Outlet, createBrowserRouter } from "react-router-dom";
 import Root from "../layouts/root/Root";
 import Dashboard from "../layouts/dashboard/Dashboard";
 import Login from "../pages/root/signInUp/Login";
 import Register from "../pages/root/signInUp/Register";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 import Home from "../pages/root/home/Home";
 import Error from "../pages/404/Error";
 import Request from "../pages/root/request/Request";
@@ -12,6 +13,7 @@ import Profile from "../pages/dashboard/user/Profile";
 import DonationProfile from "../pages/dashboard/user/DonationProfile";
 import Donar from "../pages/root/donar/Donar";
 import MyRequest from "../pages/dashboard/user/MyRequest";
+import ManageUsers from "../pages/dashboard/admin/ManageUsers";
 
 const router = createBrowserRouter([
   {
@@ -32,11 +34,11 @@ const router = createBrowserRouter([
         element: <Login></Login>,
       },
       {
-        path: "request",
+        path: "requests",
         element: <Request></Request>,
       },
       {
-        path: "donar",
+        path: "donars",
         element: <Donar></Donar>,
       },
     ],
@@ -50,6 +52,22 @@ const router = createBrowserRouter([
     ),
     errorElement: <Error></Error>,
     children: [
+      // admin routes
+      {
+        path: "admin",
+        element: (
+          <AdminRoute>
+            <Outlet />
+          </AdminRoute>
+        ),
+        children: [
+          {
+            path: "users",
+            element: <ManageUsers></ManageUsers>,
+          },
+        ],
+      },
+      // user routes
       {
         index: true,
         element: <Navigate to="profile"></Navigate>,

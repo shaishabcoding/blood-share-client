@@ -33,7 +33,7 @@ const DonarTable = ({ donars }) => {
                 <td>
                   <div className="avatar drop-shadow-md relative z-[1] flex items-center">
                     <div className="w-10 mask mask-squircle bg-white">
-                      <img src={donar.img} />
+                      <img src={donar?.img} />
                     </div>
                     {idx === 0 && (
                       <div className="w-6 absolute -top-3 -left-3 -rotate-45">

@@ -32,10 +32,10 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="request">Request ({requestsCount})</NavLink>
+        <NavLink to="requests">Request ({requestsCount})</NavLink>
       </li>
       <li>
-        <NavLink to="donar">Donar ({donarsCount})</NavLink>
+        <NavLink to="donars">Donar ({donarsCount})</NavLink>
       </li>
       {user ? (
         <></>

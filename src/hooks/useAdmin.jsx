@@ -17,5 +17,5 @@
 // };
 
 // export default useAdmin;
-const useAdmin = () => [false, false];
+const useAdmin = () => [true, false];
 export default useAdmin;

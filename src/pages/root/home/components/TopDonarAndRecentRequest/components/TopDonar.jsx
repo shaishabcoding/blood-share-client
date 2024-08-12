@@ -7,7 +7,7 @@ const TopDonar = () => {
   return (
     <div>
       <h2 className="font-bold text-4xl mb-6 md:mb-10 text-primary">
-        <Link to="donar" className="link-hover">
+        <Link to="donars" className="link-hover">
           Donar ({donars?.length})
         </Link>
       </h2>
