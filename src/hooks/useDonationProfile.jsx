@@ -3,10 +3,10 @@ import useAuth from "./useAuth";
 import usePrivateClient from "./usePrivateClient";
 
 const useDonationProfile = () => {
-  const { loading } = useAuth();
+  const { user, loading } = useAuth();
   const privateClient = usePrivateClient();
   const { data, refetch } = useQuery({
-    queryKey: ["donationProfile"],
+    queryKey: ["donationProfile", user?.email],
     enabled: !loading,
     queryFn: async () => {
       const res = await privateClient.get(`/donation-profile`);

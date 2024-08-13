@@ -6,8 +6,14 @@ import { BiSolidDonateBlood } from "react-icons/bi";
 import usePrivateClient from "../../../hooks/usePrivateClient";
 import useAuth from "../../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import useAdmin from "../../../hooks/useAdmin";
+import useRequests from "../../../hooks/useRequests";
+import useMyRequests from "../../../hooks/useMyRequests";
 
 const NewRequest = () => {
+  const [isAdmin] = useAdmin();
+  const [, requestsRefetch] = useRequests();
+  const [, refetch] = useMyRequests();
   const navigate = useNavigate();
   const privateClient = usePrivateClient();
   const { user } = useAuth();
@@ -32,15 +38,21 @@ const NewRequest = () => {
     const res = await privateClient.post("blood-request/new", data);
     if (res.data.insertedId) {
       reset();
+      refetch();
+      isAdmin && requestsRefetch();
       Swal.fire({
         title: "Success",
         text: "Click Search button to find donar.",
         icon: "success",
         confirmButtonText: "Search Donar?",
-      }).then(() => {
-        navigate(
-          `/donars?bloodGroup=${data.bloodGroup}&location=${data.location}`
-        );
+        showCancelButton: true,
+        cancelButtonColor: "#999",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate(
+            `/donars?bloodGroup=${data.bloodGroup}&location=${data.location}`
+          );
+        }
       });
     }
     setLoading(false);

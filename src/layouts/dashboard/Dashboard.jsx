@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useNavigation } from "react-router-dom";
 import Loading from "../../shared/loading/Loading";
 import SideBar from "./components/SideBar";
@@ -8,9 +8,13 @@ import useUsers from "../../hooks/useUsers";
 import Navbar from "./components/Navbar";
 import useMyRequests from "../../hooks/useMyRequests";
 import useDonars from "../../hooks/useDonars";
+import useDonationProfile from "../../hooks/useDonationProfile";
 import useRequests from "../../hooks/useRequests";
 
 const Dashboard = () => {
+  const location = useLocation();
+  console.log(location?.pathname);
+  const [donationProfile] = useDonationProfile();
   const [{ usersCount }] = useUsers();
   const [{ donarsCount }] = useDonars();
   const [{ requestsCount }] = useRequests();
@@ -27,9 +31,12 @@ const Dashboard = () => {
       <li>
         <NavLink to="blood-request">Blood Request</NavLink>
       </li>
-      <li>
-        <NavLink to="donation-profile">Donation Profile</NavLink>
-      </li>
+      {(donationProfile ||
+        location?.pathname === "/dashboard/donation-profile") && (
+        <li>
+          <NavLink to="donation-profile">Donation Profile</NavLink>
+        </li>
+      )}
       <li>
         <NavLink to="my-request">My Request ({requests?.length})</NavLink>
       </li>

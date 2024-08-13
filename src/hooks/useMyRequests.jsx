@@ -3,10 +3,10 @@ import useAuth from "./useAuth";
 import usePrivateClient from "./usePrivateClient";
 
 const useMyRequests = () => {
-  const { loading } = useAuth();
+  const { user, loading } = useAuth();
   const privateClient = usePrivateClient();
   const { data, refetch } = useQuery({
-    queryKey: ["requests/my"],
+    queryKey: ["requests/my", user?.email],
     enabled: !loading,
     queryFn: async () => {
       const res = await privateClient.get(`/requests/my`);

@@ -127,8 +127,8 @@ const Navbar = () => {
                   {user?.displayName}
                 </span>
                 <li>
-                  <Link to="/dashboard/profile" className="font-medium">
-                    Profile
+                  <Link to="/dashboard" className="font-medium">
+                    Dashboard
                   </Link>
                 </li>
                 <button

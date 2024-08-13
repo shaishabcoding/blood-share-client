@@ -21,16 +21,11 @@ const ManageRequests = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        privateClient.delete(`/requests/${id}`).then(({ data }) => {
+        privateClient.delete(`/admin/requests/${id}`).then(({ data }) => {
           if (data.deletedCount > 0) {
             refetch();
             setDeleteLoading([false, id]);
-            Swal.fire({
-              title: "Success",
-              text: "Request delete successfully!",
-              icon: "success",
-              confirmButtonText: "Done",
-            });
+            toast.success("Request delete successfully!");
           } else {
             toast.error("Failed to delete");
           }

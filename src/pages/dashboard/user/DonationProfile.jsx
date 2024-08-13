@@ -9,12 +9,19 @@ import useDonationProfile from "../../../hooks/useDonationProfile";
 import { useEffect } from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import { RiDeleteBin6Fill } from "react-icons/ri";
+import { toast } from "react-toastify";
+import useAdmin from "../../../hooks/useAdmin";
+import useDonars from "../../../hooks/useDonars";
 
 const DonationProfile = () => {
+  const [isAdmin] = useAdmin();
+  const [, donarsRefetch] = useDonars();
   const navigate = useNavigate();
   const privateClient = usePrivateClient();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const bloodGroups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
   const [donationProfile, refetch] = useDonationProfile();
   const {
@@ -36,29 +43,66 @@ const DonationProfile = () => {
     if (donationProfile) {
       const newProfile = { ...donationProfile };
       reset(newProfile);
-    }
+    } else reset();
   }, [donationProfile, reset]);
 
   const handleFormSubmit = handleSubmit(async (data) => {
     setLoading(true);
     const res = await privateClient.patch("/donation-profile", data);
-
     if (res.data.modifiedCount > 0 || res.data.upsertedCount > 0) {
       reset();
       refetch();
+      isAdmin && donarsRefetch();
       Swal.fire({
         title: "Success",
         text: "Click Search button to find blood requests.",
         icon: "success",
         confirmButtonText: "Search requests?",
-      }).then(() => {
-        navigate(
-          `/requests?bloodGroup=${data.bloodGroup}&location=${data.location}`
-        );
+        showCancelButton: true,
+        cancelButtonColor: "#999",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate(
+            `/requests?bloodGroup=${data.bloodGroup}&location=${data.location}`
+          );
+        }
       });
     }
     setLoading(false);
   });
+
+  const handleDelete = () => {
+    setDeleteLoading(true);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#999",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        privateClient.delete(`/donation-profile`).then(({ data }) => {
+          if (data.deletedCount > 0) {
+            refetch();
+            isAdmin && donarsRefetch();
+            Swal.fire({
+              title: "Success",
+              text: "Donation Profile delete successfully!",
+              icon: "success",
+              confirmButtonText: "Done",
+            }).then(() => {
+              navigate("/dashboard/profile");
+            });
+          } else {
+            toast.error("Failed to delete");
+          }
+        });
+      }
+      setDeleteLoading(false);
+    });
+  };
 
   return (
     <div className="w-full lg:p-6 px-2 lg:mx-0 lg:rounded-lg lg:mt-6">
@@ -257,19 +301,37 @@ const DonationProfile = () => {
               <p className="text-red-500">{errors.description.message}</p>
             )}
           </div>
-          <button
-            disabled={loading}
-            className="btn bg-primary-light mt-2 text-white dark:bg-primary-dark w-full"
-            type="submit"
-          >
-            {loading ? (
-              <Loading className="my-0 text-primary" />
-            ) : (
-              <>
-                Update <BiSolidDonateBlood />
-              </>
+          <div className="join w-full my-2">
+            {donationProfile && (
+              <button
+                disabled={deleteLoading}
+                onClick={handleDelete}
+                title="delete"
+                className="btn join-item text-white disabled:text-primary btn-error dark:bg-gray-700 dark:text-white dark:border-gray-400"
+              >
+                {deleteLoading ? (
+                  <span className="loading loading-spinner loading-sm"></span>
+                ) : (
+                  <>
+                    <RiDeleteBin6Fill />
+                  </>
+                )}
+              </button>
             )}
-          </button>
+            <button
+              disabled={loading}
+              className="btn join-item text-white disabled:text-primary btn-accent dark:bg-gray-700 dark:text-white dark:border-gray-400 grow"
+              type="submit"
+            >
+              {loading ? (
+                <Loading className="my-0 text-primary" />
+              ) : (
+                <>
+                  {donationProfile ? "Update" : "Create"} <BiSolidDonateBlood />
+                </>
+              )}
+            </button>
+          </div>
         </form>
       </div>
     </div>

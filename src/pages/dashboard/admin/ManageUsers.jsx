@@ -27,12 +27,7 @@ const ManageUsers = () => {
           if (data.deletedCount > 0) {
             refetch();
             setDeleteLoading([false, id]);
-            Swal.fire({
-              title: "Success",
-              text: "User delete successfully!",
-              icon: "success",
-              confirmButtonText: "Done",
-            });
+            toast.success("User delete successfully!");
           } else {
             toast.error("Failed to delete");
           }

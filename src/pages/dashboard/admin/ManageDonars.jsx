@@ -25,12 +25,7 @@ const ManageDonars = () => {
           if (data.deletedCount > 0) {
             refetch();
             setDeleteLoading([false, id]);
-            Swal.fire({
-              title: "Success",
-              text: "Donars delete successfully!",
-              icon: "success",
-              confirmButtonText: "Done",
-            });
+            toast.success("Donar delete successfully!");
           } else {
             toast.error("Failed to delete");
           }
