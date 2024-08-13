@@ -6,8 +6,12 @@ import { CiDark, CiLight } from "react-icons/ci";
 import useAuth from "../../../hooks/useAuth";
 import useDonars from "../../../hooks/useDonars";
 import useRequests from "../../../hooks/useRequests";
+import usePrivateClient from "../../../hooks/usePrivateClient";
+import useDonationProfile from "../../../hooks/useDonationProfile";
 
 const Navbar = () => {
+  const privateClient = usePrivateClient();
+  const [donationProfile, refetch] = useDonationProfile();
   const [{ donarsCount }] = useDonars();
   const [{ requestsCount }] = useRequests();
   const { user, logOut } = useAuth();
@@ -24,6 +28,16 @@ const Navbar = () => {
     setIsDarkMode(newMode);
     localStorage.setItem("theme", newMode ? "dark" : "light");
     document.documentElement.classList.toggle("dark", newMode);
+  };
+
+  const handleCheckedChange = (e) => {
+    privateClient
+      .patch("/donation-profile/active", {
+        active: e.target.checked,
+      })
+      .then(() => {
+        refetch();
+      });
   };
 
   const links = (
@@ -126,6 +140,19 @@ const Navbar = () => {
                 <span className="mx-4 mt-2 font-semibold">
                   {user?.displayName}
                 </span>
+                {donationProfile && (
+                  <li>
+                    <label className="font-medium flex gap-2">
+                      Active
+                      <input
+                        defaultChecked={donationProfile?.active}
+                        className="checkbox checkbox-primary"
+                        type="checkbox"
+                        onChange={handleCheckedChange}
+                      />
+                    </label>
+                  </li>
+                )}
                 <li>
                   <Link to="/dashboard" className="font-medium">
                     Dashboard
