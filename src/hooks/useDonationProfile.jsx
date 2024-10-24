@@ -7,7 +7,7 @@ const useDonationProfile = () => {
   const privateClient = usePrivateClient();
   const { data, refetch } = useQuery({
     queryKey: ["donationProfile", user?.email],
-    enabled: !loading,
+    enabled: !loading && !!user?.email,
     queryFn: async () => {
       const res = await privateClient.get(`/donation-profile`);
       return res.data;
